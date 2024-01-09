@@ -8,6 +8,11 @@ import thumbDownLogo from "./assets/icon/thumb-down.svg";
 import beerCanLogo from "./assets/icon/can-of-beer.svg";
 import userLogo from "./assets/icon/user.svg";
 import logoutLogo from "./assets/icon/logout.svg";
+import replyLogo from "./assets/icon/reply.svg";
+import replyWriteLogo from "./assets/icon/reply-white.svg";
+import thumbUpWhiteLogo from "./assets/icon/thumb-up-white.svg";
+import thumbDownWhiteLogo from "./assets/icon/thumb-down-white.svg";
+import dialogLogo from "./assets/icon/dialog.svg";
 
 function App() {
   return (
@@ -108,10 +113,10 @@ function App() {
         <div className="grow bg-gray-950/50"></div>
       </div>
 
-      {/* left split view */}
-      <div className="relative h-screen overflow-y-scroll min-w-full md:w-full md:min-w-[30%] lg:w-1/2">
+      {/* left split view add hidden to hide */}
+      <div className="h-screen min-w-full md:min-w-[30%] md:w-1/2 lg:w-1/3 overflow-y-scroll">
         {/* title */}
-        <div className="top-0 h-10 w-full sticky bg-white text-white z-10">
+        <div className="top-0 h-10 w-full fixed bg-white text-white z-10 md:w-1/2 lg:w-1/3">
           <div className="flex bg-gray-900/95 items-center">
             <span className="p-2 cursor-pointer hover:bg-gray-700 hidden md:block">
               <div className="flex">
@@ -133,7 +138,7 @@ function App() {
               </div>
             </span>
             <div className="flex items-center p-2 h-10 grow">
-              <h1 className="grow text-center text-ellipsis overflow-hidden whitespace-nowrap">
+              <h1 className="w-10 grow text-center text-ellipsis overflow-hidden whitespace-nowrap">
                 Anime
               </h1>
             </div>
@@ -164,7 +169,7 @@ function App() {
         </div>
 
         {/* post list */}
-        <div className="flex flex-col">
+        <div className="flex flex-col mt-10 mb-10 md:mb-0 w-full">
           <div className="relative px-6 py-3 border-b-2 border-black-500">
             <div className="pb-1 flex gap-2 items-center">
               <span className="text-blue-600">User Name</span>
@@ -296,10 +301,37 @@ function App() {
               className="absolute top-0 left-0 w-full h-full hover:bg-blue-900/10"
             ></a>
           </div>
+
+          <div className="relative px-6 py-3 border-b-2 border-black-500">
+            <div className="pb-1 flex gap-2 items-center">
+              <span className="text-blue-600">User Name</span>
+              <span className="text-xs">1 day ago</span>
+              <span className="flex items-center">
+                <img
+                  src={thumbDownLogo}
+                  className="h-4 w-4"
+                  alt="arrow"
+                  width="40px"
+                  height="40px"
+                />
+                <span className="text-xs">123</span>
+              </span>
+            </div>
+            <span className="max-h-24 overflow-hidden break-words">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+              eius soluta, ad assumenda saepe id architecto sed, praesentium
+              tempore mollitia rem quisquam totam, distinctio nobis aliquid
+              omnis porro quis? Reprehenderit.
+            </span>
+            <a
+              href="#5"
+              className="absolute top-0 left-0 w-full h-full hover:bg-blue-900/10"
+            ></a>
+          </div>
         </div>
 
         {/* footer for mobile view */}
-        <div className="flex sticky h-10 w-full bottom-0 bg-gray-950 md:hidden">
+        <div className="flex fixed h-10 w-full bottom-0 bg-gray-950 md:hidden">
           <span className="grow flex items-center justify-center cursor-pointer hover:bg-gray-800">
             <img
               src={hamburgerLogo}
@@ -339,127 +371,182 @@ function App() {
         </div>
       </div>
 
-      <div className="h-screen overflow-y-scroll">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-          ipsum optio magni molestias? Hic facilis illo consequuntur aliquam
-          harum molestiae voluptate, amet libero incidunt quibusdam, similique
-          aut in recusandae culpa.
-        </p>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod id fuga
-          voluptas quaerat quis ipsam est dignissimos suscipit expedita ab,
-          nostrum obcaecati hic dicta distinctio velit quisquam neque, labore
-          veniam?
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-          ipsum optio magni molestias? Hic facilis illo consequuntur aliquam
-          harum molestiae voluptate, amet libero incidunt quibusdam, similique
-          aut in recusandae culpa.
-        </p>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod id fuga
-          voluptas quaerat quis ipsam est dignissimos suscipit expedita ab,
-          nostrum obcaecati hic dicta distinctio velit quisquam neque, labore
-          veniam?
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-          ipsum optio magni molestias? Hic facilis illo consequuntur aliquam
-          harum molestiae voluptate, amet libero incidunt quibusdam, similique
-          aut in recusandae culpa.
-        </p>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod id fuga
-          voluptas quaerat quis ipsam est dignissimos suscipit expedita ab,
-          nostrum obcaecati hic dicta distinctio velit quisquam neque, labore
-          veniam?
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-          ipsum optio magni molestias? Hic facilis illo consequuntur aliquam
-          harum molestiae voluptate, amet libero incidunt quibusdam, similique
-          aut in recusandae culpa.
-        </p>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod id fuga
-          voluptas quaerat quis ipsam est dignissimos suscipit expedita ab,
-          nostrum obcaecati hic dicta distinctio velit quisquam neque, labore
-          veniam?
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-          ipsum optio magni molestias? Hic facilis illo consequuntur aliquam
-          harum molestiae voluptate, amet libero incidunt quibusdam, similique
-          aut in recusandae culpa.
-        </p>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod id fuga
-          voluptas quaerat quis ipsam est dignissimos suscipit expedita ab,
-          nostrum obcaecati hic dicta distinctio velit quisquam neque, labore
-          veniam?
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-          ipsum optio magni molestias? Hic facilis illo consequuntur aliquam
-          harum molestiae voluptate, amet libero incidunt quibusdam, similique
-          aut in recusandae culpa.
-        </p>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod id fuga
-          voluptas quaerat quis ipsam est dignissimos suscipit expedita ab,
-          nostrum obcaecati hic dicta distinctio velit quisquam neque, labore
-          veniam?
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-          ipsum optio magni molestias? Hic facilis illo consequuntur aliquam
-          harum molestiae voluptate, amet libero incidunt quibusdam, similique
-          aut in recusandae culpa.
-        </p>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod id fuga
-          voluptas quaerat quis ipsam est dignissimos suscipit expedita ab,
-          nostrum obcaecati hic dicta distinctio velit quisquam neque, labore
-          veniam?
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-          ipsum optio magni molestias? Hic facilis illo consequuntur aliquam
-          harum molestiae voluptate, amet libero incidunt quibusdam, similique
-          aut in recusandae culpa.
-        </p>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod id fuga
-          voluptas quaerat quis ipsam est dignissimos suscipit expedita ab,
-          nostrum obcaecati hic dicta distinctio velit quisquam neque, labore
-          veniam?
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-          ipsum optio magni molestias? Hic facilis illo consequuntur aliquam
-          harum molestiae voluptate, amet libero incidunt quibusdam, similique
-          aut in recusandae culpa.
-        </p>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod id fuga
-          voluptas quaerat quis ipsam est dignissimos suscipit expedita ab,
-          nostrum obcaecati hic dicta distinctio velit quisquam neque, labore
-          veniam?
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-          ipsum optio magni molestias? Hic facilis illo consequuntur aliquam
-          harum molestiae voluptate, amet libero incidunt quibusdam, similique
-          aut in recusandae culpa.
-        </p>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod id fuga
-          voluptas quaerat quis ipsam est dignissimos suscipit expedita ab,
-          nostrum obcaecati hic dicta distinctio velit quisquam neque, labore
-          veniam?
-        </p>
+      {/* right split view */}
+      <div className="flex flex-col h-screen overflow-y-scroll md:border-solid md:border-l md:border-gray min-w-full md:min-w-[30%] md:w-1/2 lg:w-2/3">
+        {/* title */}
+        <div className="top-0 h-10 z-20 w-full fixed bg-white text-white z-0 md:w-1/2 lg:w-2/3">
+          <div className="flex bg-gray-900/95 items-center">
+            <span className="p-2 cursor-pointer hover:bg-gray-700 hidden md:block">
+              <div className="flex">
+                <img
+                  src={arrowLeftLogo}
+                  className="h-8 w-8"
+                  alt="arrow"
+                  width="40px"
+                  height="40px"
+                />
+              </div>
+            </span>
+            <div className="flex items-center p-2 h-10 grow">
+              <h1 className="w-10 grow text-left text-ellipsis overflow-hidden whitespace-nowrap">
+                Demon Slayer is Good !!!
+              </h1>
+            </div>
+
+            <div className="flex gap-2 mr-3 items-center">
+              <div className="flex flex-col items-center cursor-pointer hover:bg-gray-700">
+                <span className="p-2">
+                  <div className="flex">
+                    <img
+                      src={replyWriteLogo}
+                      className="h-5 w-5"
+                      alt="arrow"
+                      width="40px"
+                      height="40px"
+                    />
+                  </div>
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center cursor-pointer hover:bg-gray-700">
+                <span className="p-2">
+                  <div className="flex">
+                    <img
+                      src={thumbUpWhiteLogo}
+                      className="h-4 w-4"
+                      alt="arrow"
+                    />
+                  </div>
+                </span>
+                <span className="text-xs">123</span>
+              </div>
+              <div className="flex flex-col items-center cursor-pointer hover:bg-gray-700">
+                <span className="p-2">
+                  <div className="flex">
+                    <img
+                      src={thumbDownWhiteLogo}
+                      className="h-4 w-4"
+                      alt="arrow"
+                    />
+                  </div>
+                </span>
+                <span className="text-xs">456</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* comment list */}
+        <div className="flex flex-col mt-10 mb-10 md:mb-0">
+          <div className="relative px-6 py-3 border-b-2 border-black-500">
+            <div className="pb-1 flex gap-2 items-center">
+              <span className="text-blue-600 cursor-pointer hover:underline">
+                User Name
+              </span>
+              <span className="text-xs">1 day ago</span>
+              <img
+                src={replyLogo}
+                className="h-4 w-4 ml-auto cursor-pointer hover:invert-[.5]"
+                alt="arrow"
+                width="40px"
+                height="40px"
+              />
+            </div>
+            <span className="max-h-24 overflow-hidden break-words">
+              LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem
+            </span>
+            <div className="flex gap-2">
+              <div className="flex w-max mt-3 p-2 gap-3 border border-black border-solid rounded">
+                <div className="flex gap-1 items-center">
+                  <img
+                    src={thumbUpLogo}
+                    className="h-3 w-3 cursor-pointer hover:invert-[.5]"
+                    alt="arrow"
+                  />
+                  <span className="text-xs">123123123</span>
+                </div>
+                <div className="flex gap-1 items-center">
+                  <img
+                    src={thumbDownLogo}
+                    className="h-3 w-3 cursor-pointer hover:invert-[.5]"
+                    alt="arrow"
+                  />
+                  <span className="text-xs">123</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative px-6 py-3 border-b-2 border-black-500">
+            {/* Comment Metadata */}
+            <div className="pb-1 flex gap-2 items-center">
+              <span className="text-blue-600 cursor-pointer hover:underline">
+                User Name
+              </span>
+              <span className="text-xs">1 day ago</span>
+              <img
+                src={replyLogo}
+                className="h-4 w-4 ml-auto cursor-pointer hover:invert-[.5]"
+                alt="arrow"
+                width="40px"
+                height="40px"
+              />
+            </div>
+
+            {/* Comment Parents */}
+            <div className="mb-2">
+              <blockquote className="relative">
+                <div className="absolute bg-gray-800 hover:bg-gray-400 h-full w-[2px] cursor-pointer"></div>
+                <p className="ml-3">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolores natus aut veniam unde recusandae? Doloremque maxime
+                  aperiam, libero quos voluptates itaque modi atque illum.
+                  Aliquam debitis a voluptate voluptates magnam.
+                </p>
+              </blockquote>
+            </div>
+
+            {/* Comment Content */}
+            <span className="max-h-24 overflow-hidden break-words">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam,
+              non illum? Nesciunt sint consequuntur blanditiis, mollitia
+              adipisci corrupti! Esse sed quidem adipisci unde deserunt natus
+              reprehenderit fuga assumenda accusantium cumque!
+            </span>
+
+            {/* Comment Up/down vote, children comments button */}
+            <div className="flex gap-2">
+              <div className="flex w-max mt-3 p-2 gap-3 border border-black border-solid rounded">
+                <div className="flex gap-1 items-center">
+                  <img
+                    src={thumbUpLogo}
+                    className="h-3 w-3 cursor-pointer hover:invert-[.5]"
+                    alt="arrow"
+                  />
+                  <span className="text-xs">123123123</span>
+                </div>
+                <div className="flex gap-1 items-center">
+                  <img
+                    src={thumbDownLogo}
+                    className="h-3 w-3 cursor-pointer hover:invert-[.5]"
+                    alt="arrow"
+                  />
+                  <span className="text-xs">123</span>
+                </div>
+              </div>
+              <div className="flex w-max mt-3 p-2 gap-3 border border-black border-solid rounded">
+                <div className="flex gap-1 items-center">
+                  <img
+                    src={dialogLogo}
+                    className="h-4 w-4 cursor-pointer hover:invert-[.5]"
+                    alt="arrow"
+                  />
+                  <span className="text-xs">10</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
