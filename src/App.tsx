@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="flex overflow-x-hidden">
       {/* left hamburger menu interchange flex <--> hidden to show/hide*/}
-      <div className="hidden fixed w-full h-full z-20">
+      <div className="hidden fixed w-full h-full z-50">
         <div className="relative h-full w-72 bg-gray-950/80 backdrop-blur overflow-y-scroll">
           <div className="sticky top-0 bg-gray-950">
             <div className="flex items-center justify-center p-3">
@@ -438,6 +438,7 @@ function App() {
 
         {/* comment list */}
         <div className="flex flex-col mt-10 mb-10 md:mb-0">
+          {/* comment 1 */}
           <div className="relative px-6 py-3 border-b-2 border-black-500">
             <div className="pb-1 flex gap-2 items-center">
               <span className="text-blue-600 cursor-pointer hover:underline">
@@ -477,6 +478,7 @@ function App() {
             </div>
           </div>
 
+          {/* comment 2 */}
           <div className="relative px-6 py-3 border-b-2 border-black-500">
             {/* Comment Metadata */}
             <div className="pb-1 flex gap-2 items-center">
@@ -493,10 +495,53 @@ function App() {
               />
             </div>
 
-            {/* Comment Parents */}
-            <div className="mb-2">
+            {/* Comment that have ancestors */}
+            <div className="my-2">
               <blockquote className="relative">
-                <div className="absolute bg-gray-800 hover:bg-gray-400 h-full w-[2px] cursor-pointer"></div>
+                <div className="absolute h-full w-[5px] cursor-pointer group">
+                  <div className="bg-gray-800 group-hover:bg-gray-400 w-[2px] h-full"></div>
+                </div>
+
+                {/* Comment father */}
+                <blockquote className="relative ml-3 mb-2">
+                  <div className="absolute h-full w-[5px] cursor-pointer group">
+                    <div className="bg-gray-800 group-hover:bg-gray-400 w-[2px] h-full"></div>
+                  </div>
+
+                  {/* Comment grandfather */}
+                  <blockquote className="relative ml-3 mb-2">
+                    <div className="absolute h-full w-[5px] cursor-pointer group">
+                      <div className="bg-gray-800 group-hover:bg-gray-400 w-[2px] h-full"></div>
+                    </div>
+
+                    {/* Show load more button when reach 3 levels */}
+                    <blockquote className="relative ml-3 mb-2">
+                      <div className="absolute h-full w-[5px] group">
+                        <div className="bg-gray-800 w-[2px] h-full"></div>
+                      </div>
+                      <div className="h-8">
+                        <span className="ml-3 cursor-pointer border border-black border-solid rounded text-xs p-1 hover:bg-gray-300">
+                          Load More
+                        </span>
+                      </div>
+                    </blockquote>
+
+                    <p className="ml-3">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Dolores natus aut veniam unde recusandae? Doloremque
+                      maxime aperiam, libero quos voluptates itaque modi atque
+                      illum. Aliquam debitis a voluptate voluptates magnam.
+                    </p>
+                  </blockquote>
+
+                  <p className="ml-3">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Dolores natus aut veniam unde recusandae? Doloremque maxime
+                    aperiam, libero quos voluptates itaque modi atque illum.
+                    Aliquam debitis a voluptate voluptates magnam.
+                  </p>
+                </blockquote>
+
                 <p className="ml-3">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Dolores natus aut veniam unde recusandae? Doloremque maxime
@@ -542,6 +587,46 @@ function App() {
                     alt="arrow"
                   />
                   <span className="text-xs">10</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* comment 3 */}
+          <div className="relative px-6 py-3 border-b-2 border-black-500">
+            <div className="pb-1 flex gap-2 items-center">
+              <span className="text-blue-600 cursor-pointer hover:underline">
+                User Name
+              </span>
+              <span className="text-xs">1 day ago</span>
+              <img
+                src={replyLogo}
+                className="h-4 w-4 ml-auto cursor-pointer hover:invert-[.5]"
+                alt="arrow"
+                width="40px"
+                height="40px"
+              />
+            </div>
+            <span className="max-h-24 overflow-hidden break-words">
+              LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem
+            </span>
+            <div className="flex gap-2">
+              <div className="flex w-max mt-3 p-2 gap-3 border border-black border-solid rounded">
+                <div className="flex gap-1 items-center">
+                  <img
+                    src={thumbUpLogo}
+                    className="h-3 w-3 cursor-pointer hover:invert-[.5]"
+                    alt="arrow"
+                  />
+                  <span className="text-xs">123123123</span>
+                </div>
+                <div className="flex gap-1 items-center">
+                  <img
+                    src={thumbDownLogo}
+                    className="h-3 w-3 cursor-pointer hover:invert-[.5]"
+                    alt="arrow"
+                  />
+                  <span className="text-xs">123</span>
                 </div>
               </div>
             </div>
