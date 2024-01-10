@@ -19,91 +19,101 @@ function App() {
     <div className="flex overflow-x-hidden">
       {/* left hamburger menu interchange flex <--> hidden to show/hide*/}
       <div className="hidden fixed w-full h-full z-50">
-        <div className="relative h-full w-72 bg-gray-950/80 backdrop-blur overflow-y-scroll">
-          <div className="sticky top-0 bg-gray-950">
+        <div className="h-full w-72 bg-gray-950/80 backdrop-blur">
+          <div className="fixed w-full h-15 top-0 bg-gray-950">
             <div className="flex items-center justify-center p-3">
               <img src={beerCanLogo} className="h-12 w-12" alt="arrow" />
             </div>
           </div>
+          <div className="mt-16 h-[calc(100%-7rem)] overflow-y-scroll">
+            <div className="grid grid-cols-2 p-4 text-white">
+              <div className="text-sm col-span-2 text-stone-400 pb-2">
+                Hobby
+              </div>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Anime
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Game
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Movie
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Music
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Toys
+              </a>
+            </div>
+            <div className="grid grid-cols-2 p-4 text-white">
+              <div className="text-sm col-span-2 text-stone-400 pb-2">
+                Hobby2
+              </div>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Anime
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Game
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Movie
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Music
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Toys
+              </a>
+            </div>
+            <div className="grid grid-cols-2 p-4 text-white">
+              <div className="text-sm col-span-2 text-stone-400 pb-2">
+                Hobby2
+              </div>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Anime
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Game
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Movie
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Music
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Toys
+              </a>
+            </div>
+            <div className="grid grid-cols-2 p-4 text-white">
+              <div className="text-sm col-span-2 text-stone-400 pb-2">
+                Hobby2
+              </div>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Anime
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Game
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Movie
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Music
+              </a>
+              <a href="#link1" className="text-lg pl-2 pb-2">
+                Toys
+              </a>
+            </div>
+          </div>
 
-          <div className="grid grid-cols-2 p-4 text-white">
-            <div className="text-sm col-span-2 text-stone-400 pb-2">Hobby</div>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Anime
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Game
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Movie
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Music
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Toys
-            </a>
-          </div>
-          <div className="grid grid-cols-2 p-4 text-white">
-            <div className="text-sm col-span-2 text-stone-400 pb-2">Hobby2</div>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Anime
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Game
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Movie
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Music
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Toys
-            </a>
-          </div>
-          <div className="grid grid-cols-2 p-4 text-white">
-            <div className="text-sm col-span-2 text-stone-400 pb-2">Hobby3</div>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Anime
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Game
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Movie
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Music
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Toys
-            </a>
-          </div>
-          <div className="grid grid-cols-2 p-4 text-white">
-            <div className="text-sm col-span-2 text-stone-400 pb-2">Hobby4</div>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Anime
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Game
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Movie
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Music
-            </a>
-            <a href="#link1" className="text-lg pl-2 pb-2">
-              Toys
-            </a>
-          </div>
-          <div className="sticky bottom-0 bg-gray-950">
-            <div className="flex content-center p-2">
-              <span className="flex items-center justify-center cursor-pointer grow">
+          <div className="fixed h-12 w-full bottom-0">
+            <div className="flex content-center h-12 bg-gray-950">
+              <span className="flex items-center justify-center cursor-pointer grow hover:bg-gray-800">
                 <img src={userLogo} className="h-8 w-8" alt="arrow" />
               </span>
-              <span className="flex items-center justify-center cursor-pointer grow">
+              <span className="flex items-center justify-center cursor-pointer grow hover:bg-gray-800">
                 <img src={logoutLogo} className="h-8 w-8" alt="arrow" />
               </span>
             </div>
