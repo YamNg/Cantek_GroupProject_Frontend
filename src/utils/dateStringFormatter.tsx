@@ -1,4 +1,4 @@
-export const commentDateStringFormatter = (dateString: string): string => {
+export const dateStringFormatter = (dateString: string): string => {
   const date = new Date(dateString);
   const now = new Date();
   const diff = now.getTime() - date.getTime();

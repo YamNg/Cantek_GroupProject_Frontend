@@ -6,9 +6,16 @@ import refreshLogo from "../assets/icon/refresh.svg";
 import addPostLogo from "../assets/icon/add-post.svg";
 import beerCanLogo from "../assets/icon/can-of-beer.svg";
 import { IThreadList } from "../models/component/thread-list.component.interface";
+import { useMatch } from "react-router-dom";
+import { initializeThreadList } from "../reducers/threadListReducer";
 
-const LeftSplitViewNav = () => {
+const ThreadListViewNav = () => {
   const dispatch: AppDispatch = useDispatch();
+
+  const match = useMatch("/topic/:topicId");
+  const topicId = match?.params.topicId
+    ? String(match.params.topicId)
+    : "latest";
 
   const threadListState = useSelector(
     ({ threadList }: { threadList: IThreadList }) => {
@@ -19,7 +26,7 @@ const LeftSplitViewNav = () => {
   return (
     <div className="top-0 h-10 w-full fixed bg-white text-white z-10 md:w-1/2 lg:w-1/3">
       <div className="flex bg-gray-900/95 items-center">
-        <span
+        <div
           className="p-2 cursor-pointer hover:bg-gray-700 hidden md:block"
           onClick={() => dispatch(menuNegateActive())}
         >
@@ -40,7 +47,7 @@ const LeftSplitViewNav = () => {
               height="40px"
             />
           </div>
-        </span>
+        </div>
         <div className="flex items-center p-2 h-10 grow">
           <h1 className="w-10 grow text-center text-ellipsis overflow-hidden whitespace-nowrap">
             {threadListState.selectedTopic?._id
@@ -48,7 +55,10 @@ const LeftSplitViewNav = () => {
               : "Latest Threads"}
           </h1>
         </div>
-        <span className="p-2 cursor-pointer hover:bg-gray-700 hidden md:block">
+        <div
+          className="p-2 cursor-pointer hover:bg-gray-700 hidden md:block"
+          onClick={() => dispatch(initializeThreadList(topicId))}
+        >
           <div className="flex">
             <img
               src={refreshLogo}
@@ -58,9 +68,9 @@ const LeftSplitViewNav = () => {
               height="40px"
             />
           </div>
-        </span>
+        </div>
 
-        <span className="p-2 cursor-pointer hover:bg-gray-700 hidden md:block">
+        <div className="p-2 cursor-pointer hover:bg-gray-700 hidden md:block">
           <div className="flex">
             <img
               src={addPostLogo}
@@ -70,10 +80,10 @@ const LeftSplitViewNav = () => {
               height="40px"
             />
           </div>
-        </span>
+        </div>
       </div>
     </div>
   );
 };
 
-export default LeftSplitViewNav;
+export default ThreadListViewNav;

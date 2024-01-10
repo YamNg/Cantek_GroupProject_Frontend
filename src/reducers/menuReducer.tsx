@@ -8,7 +8,6 @@ const menuSlice = createSlice({
   initialState: {
     isActive: true,
     sections: [] as ISection[],
-    selectedTopicId: "",
   } as IMenu,
   reducers: {
     menuNegateActive(state) {

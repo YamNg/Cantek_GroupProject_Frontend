@@ -17,10 +17,17 @@ const threadListSlice = createSlice({
         selectedTopic: action.payload.selectedTopic,
       };
     },
+    mergeThreadList(state, action) {
+      return {
+        ...state,
+        threadList: state.threadList.concat(action.payload.threadList),
+      };
+    },
   },
 });
 
-export const { setThreadListAndTopic } = threadListSlice.actions;
+export const { setThreadListAndTopic, mergeThreadList } =
+  threadListSlice.actions;
 
 export const initializeThreadList = (topic: string) => {
   return async (dispatch: Dispatch) => {
@@ -34,6 +41,26 @@ export const initializeThreadList = (topic: string) => {
       setThreadListAndTopic({
         threadList: apiResponse?.threads,
         selectedTopic: apiResponse?.topic,
+      })
+    );
+  };
+};
+
+export const loadNextThreadPage = (topic: string, lastThreadId: string) => {
+  return async (dispatch: Dispatch) => {
+    let apiResponse;
+    if (topic === "latest") {
+      apiResponse = await threadService.getLatestThreads({ lastThreadId });
+    } else {
+      apiResponse = await threadService.getThreadsByTopic({
+        topicId: topic,
+        lastThreadId,
+      });
+    }
+
+    dispatch(
+      mergeThreadList({
+        threadList: apiResponse?.threads,
       })
     );
   };

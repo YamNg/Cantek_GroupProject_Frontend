@@ -2,10 +2,11 @@ import thumbUpLogo from "../assets/icon/thumb-up.svg";
 import thumbDownLogo from "../assets/icon/thumb-down.svg";
 import { useSelector } from "react-redux";
 import { IThreadList } from "../models/component/thread-list.component.interface";
-import { commentDateStringFormatter } from "../utils/CommentDateStringFormatter";
+import { dateStringFormatter } from "../utils/dateStringFormatter";
+import { Link } from "react-router-dom";
 
-const LeftSplitViewThreadList = () => {
-  const { threadList } = useSelector(
+const ThreadListViewItemList = () => {
+  const { threadList, selectedTopic } = useSelector(
     ({ threadList }: { threadList: IThreadList }) => {
       return threadList;
     }
@@ -22,7 +23,7 @@ const LeftSplitViewThreadList = () => {
             <div className="pb-1 flex gap-2 items-center">
               <span className="text-blue-600">{thread.username}</span>
               <span className="text-xs">
-                {commentDateStringFormatter(thread.createdAt)}
+                {dateStringFormatter(thread.createdAt)}
               </span>
               <span className="flex items-center gap-1">
                 <img
@@ -38,10 +39,12 @@ const LeftSplitViewThreadList = () => {
             <span className="max-h-24 overflow-hidden break-words">
               {thread.title}
             </span>
-            <a
-              href="#1"
+            <Link
               className="absolute top-0 left-0 w-full h-full hover:bg-blue-900/10"
-            ></a>
+              to={`/topic/${selectedTopic?._id ?? "latest"}/thread/${
+                thread._id
+              }`}
+            ></Link>
           </div>
         );
       })}
@@ -49,4 +52,4 @@ const LeftSplitViewThreadList = () => {
   );
 };
 
-export default LeftSplitViewThreadList;
+export default ThreadListViewItemList;
