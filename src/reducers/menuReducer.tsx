@@ -6,7 +6,7 @@ import sectionService from "../services/sectionService";
 const menuSlice = createSlice({
   name: "menu",
   initialState: {
-    isActive: true,
+    isActive: false,
     sections: [] as ISection[],
   } as IMenuComponentState,
   reducers: {

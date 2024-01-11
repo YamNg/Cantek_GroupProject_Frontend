@@ -36,22 +36,18 @@ const getThreadsByTopic = async ({
 
 const getThreadDetail = async ({
   threadId,
-  page,
+  pageNum,
 }: {
   threadId: string;
-  page?: number;
-}): Promise<{ body?: IThreadDetail; page: number }> => {
-  let requestUrl = `${threadUrl}/${threadId}/page`;
-  if (!page) {
-    page = 1;
-  }
-  requestUrl = `${requestUrl}/${page}`;
+  pageNum: number;
+}): Promise<{ body?: IThreadDetail; pageNum: number }> => {
+  const requestUrl = `${threadUrl}/${threadId}/page/${pageNum}`;
 
   const { data }: { data: IApiResponse<IThreadDetail> } = await axios.get(
     requestUrl
   );
 
-  return { body: data.body, page };
+  return { body: data.body, pageNum };
 };
 
 export default { getThreadsByTopic, getLatestThreads, getThreadDetail };

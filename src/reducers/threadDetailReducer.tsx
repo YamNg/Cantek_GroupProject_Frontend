@@ -18,7 +18,7 @@ const threadDetailSlice = createSlice({
   reducers: {
     setThreadDetail(state, action) {
       const pageObj: IThreadDetail = action.payload.body;
-      const pageNumber: number = action.payload.page;
+      const pageNumber: number = action.payload.pageNum;
 
       const result = {
         _id: pageObj._id,
@@ -59,14 +59,24 @@ const threadDetailSlice = createSlice({
         pages: newPageList,
       };
     },
+    resetThreadDetail(state) {
+      state._id = "";
+      state.title = "";
+      state.pages = [];
+      state.totalPage = 0;
+      state.pageSize = 0;
+    },
   },
 });
 
-export const { setThreadDetail } = threadDetailSlice.actions;
+export const { setThreadDetail, resetThreadDetail } = threadDetailSlice.actions;
 
-export const initializeThreadDetail = (threadId: string) => {
+export const initializeThreadDetail = (threadId: string, pageNum: number) => {
   return async (dispatch: Dispatch) => {
-    const apiResponse = await threadService.getThreadDetail({ threadId });
+    const apiResponse = await threadService.getThreadDetail({
+      threadId,
+      pageNum,
+    });
     dispatch(setThreadDetail(apiResponse));
   };
 };

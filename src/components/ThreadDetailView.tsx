@@ -9,12 +9,16 @@ import ThreadDetailViewNav from "./ThreadDetailViewNav";
 const ThreadDetailView = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const match = useMatch("/topic/:topicId/thread/:threadId");
-  const pathThreadId = match?.params.threadId;
+  const match = useMatch("/topic/:topicId/thread/:threadId/page/:pageNum");
+  const threadId = match?.params.threadId;
+  const pageNum = match?.params.pageNum ? Number(match.params.pageNum) : 1;
+
+  console.log(pageNum);
 
   useEffect(() => {
-    if (pathThreadId) dispatch(initializeThreadDetail(pathThreadId));
-  }, [dispatch, pathThreadId]);
+    if (threadId && pageNum)
+      dispatch(initializeThreadDetail(threadId, pageNum));
+  }, [dispatch, threadId]);
 
   return (
     <div className="flex flex-col h-screen overflow-y-scroll md:border-solid md:border-l md:border-gray min-w-full md:min-w-[30%] md:w-1/2 lg:w-2/3">

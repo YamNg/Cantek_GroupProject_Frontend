@@ -1,11 +1,15 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { IMenuComponentState } from "../models/component/menu.component.interface";
 import { ISection } from "../models/api/section.api.interface";
 import { ITopic } from "../models/api/topic.api.interface";
 import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
+import { resetThreadDetail } from "../reducers/threadDetailReducer";
+import { AppDispatch } from "../config/store";
 
 const MenuSectionList = () => {
+  const dispatch: AppDispatch = useDispatch();
+
   const menuState = useSelector(({ menu }: { menu: IMenuComponentState }) => {
     return menu;
   });
@@ -26,6 +30,7 @@ const MenuSectionList = () => {
               : "text-amber-300 pointer-events-none"
           }`}
           to={`/topic/latest`}
+          onClick={() => dispatch(resetThreadDetail())}
         >
           Latest Threads
         </Link>
@@ -48,6 +53,7 @@ const MenuSectionList = () => {
                         : "text-white"
                     }`}
                     to={`/topic/${topic._id}`}
+                    onClick={() => dispatch(resetThreadDetail())}
                   >
                     {topic.title}
                   </Link>

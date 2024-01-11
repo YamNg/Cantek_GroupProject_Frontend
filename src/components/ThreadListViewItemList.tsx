@@ -4,11 +4,18 @@ import { useSelector } from "react-redux";
 import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
 import { dateStringFormatter } from "../utils/dateStringFormatter";
 import { Link } from "react-router-dom";
+import { IThreadDetailComponentState } from "../models/component/thread-detail.component.interface";
 
 const ThreadListViewItemList = () => {
   const { threadList, selectedTopic } = useSelector(
     ({ threadList }: { threadList: IThreadListComponentState }) => {
       return threadList;
+    }
+  );
+
+  const threadDetailViewState = useSelector(
+    ({ threadDetail }: { threadDetail: IThreadDetailComponentState }) => {
+      return threadDetail;
     }
   );
 
@@ -40,10 +47,14 @@ const ThreadListViewItemList = () => {
               {thread.title}
             </span>
             <Link
-              className="absolute top-0 left-0 w-full h-full hover:bg-blue-900/10"
+              className={`absolute top-0 left-0 w-full h-full hover:bg-blue-900/10 ${
+                thread._id === threadDetailViewState._id
+                  ? "bg-blue-900/30 pointer-events-none"
+                  : ""
+              }`}
               to={`/topic/${selectedTopic?._id ?? "latest"}/thread/${
                 thread._id
-              }`}
+              }/page/1`}
             ></Link>
           </div>
         );
