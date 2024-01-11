@@ -3,5 +3,5 @@ import { ITopic } from "../api/topic.api.interface";
 
 export interface IThreadListComponentState {
   selectedTopic: ITopic;
-  threadList: IThreadListItem[];
+  threads: IThreadListItem[];
 }

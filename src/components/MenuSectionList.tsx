@@ -10,13 +10,15 @@ import { AppDispatch } from "../config/store";
 const MenuSectionList = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const menuState = useSelector(({ menu }: { menu: IMenuComponentState }) => {
-    return menu;
-  });
-
-  const threadListState = useSelector(
-    ({ threadList }: { threadList: IThreadListComponentState }) => {
-      return threadList;
+  const state = useSelector(
+    ({
+      menu,
+      threadList,
+    }: {
+      menu: IMenuComponentState;
+      threadList: IThreadListComponentState;
+    }) => {
+      return { menu, threadList };
     }
   );
 
@@ -25,7 +27,7 @@ const MenuSectionList = () => {
       <div className="grid grid-cols-2 p-4">
         <Link
           className={`text-lg pl-2 ${
-            threadListState.selectedTopic?._id
+            state.threadList.selectedTopic?._id
               ? "text-white"
               : "text-amber-300 pointer-events-none"
           }`}
@@ -36,8 +38,8 @@ const MenuSectionList = () => {
         </Link>
       </div>
 
-      {menuState.sections ? (
-        menuState.sections.map((section: ISection) => {
+      {state.menu.sections ? (
+        state.menu.sections.map((section: ISection) => {
           return (
             <div key={section._id} className="grid grid-cols-2 p-4 text-white">
               <div className="text-sm col-span-2 text-stone-400 pb-2">
@@ -48,7 +50,7 @@ const MenuSectionList = () => {
                   <Link
                     key={topic._id}
                     className={`text-lg pl-2 pb-2 ${
-                      threadListState.selectedTopic?._id === topic._id
+                      state.threadList.selectedTopic?._id === topic._id
                         ? "text-amber-300 pointer-events-none"
                         : "text-white"
                     }`}

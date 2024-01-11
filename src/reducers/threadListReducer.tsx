@@ -7,20 +7,20 @@ const threadListSlice = createSlice({
   name: "threadList",
   initialState: {
     selectedTopic: {},
-    threadList: [] as IThreadListItem[],
+    threads: [] as IThreadListItem[],
   } as IThreadListComponentState,
   reducers: {
     setThreadListAndTopic(state, action) {
       return {
         ...state,
-        threadList: action.payload.threadList,
+        threads: action.payload.threadList,
         selectedTopic: action.payload.selectedTopic,
       };
     },
     mergeThreadList(state, action) {
       return {
         ...state,
-        threadList: state.threadList.concat(action.payload.threadList),
+        threads: state.threads.concat(action.payload.threadList),
       };
     },
   },

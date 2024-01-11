@@ -25,21 +25,21 @@ const ThreadListView = () => {
     dispatch(initializeThreadList(pathTopicId));
   }, [dispatch, pathTopicId]);
 
-  const threadListState = useSelector(
-    ({ threadList }: { threadList: IThreadListComponentState }) => {
-      return threadList;
-    }
-  );
-
-  const threadDetailViewState = useSelector(
-    ({ threadDetail }: { threadDetail: IThreadDetailComponentState }) => {
-      return threadDetail;
+  const state = useSelector(
+    ({
+      threadList,
+      threadDetail,
+    }: {
+      threadList: IThreadListComponentState;
+      threadDetail: IThreadDetailComponentState;
+    }) => {
+      return { threadList, threadDetail };
     }
   );
 
   const onScrollThreadListEvent = (e: React.UIEvent<HTMLElement>) => {
     if (isScrollReachBottom(e)) {
-      const threadList = threadListState.threadList;
+      const threadList = state.threadList.threads;
       const lastLoadedThread = threadList[threadList.length - 1];
 
       if (threadList.length > 0 && match)
@@ -52,7 +52,7 @@ const ThreadListView = () => {
   return (
     <div
       className={`${
-        threadDetailViewState._id === "" ? "block" : "hidden md:block"
+        state.threadDetail._id === "" ? "block" : "hidden md:block"
       } h-screen min-w-full md:min-w-[30%] md:w-1/2 lg:w-1/3 overflow-y-scroll`}
       onScroll={(e) => onScrollThreadListEvent(e)}
     >
