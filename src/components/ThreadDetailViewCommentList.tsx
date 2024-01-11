@@ -56,7 +56,6 @@ const ThreadDetailViewCommentList = () => {
     if (threadId) dispatch(appendCommentPage(threadId, targetPageNum));
   };
 
-  return (
     <div className="flex flex-col mt-12 mb-10 md:mb-0">
       {threadDetailPages.map((page) => {
         return (
