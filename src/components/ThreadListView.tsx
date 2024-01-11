@@ -37,12 +37,18 @@ const ThreadListView = () => {
     }
   );
 
+  const reachLastThreadState = useSelector(
+    ({ threadList }: { threadList: IThreadListComponentState }) => {
+      return threadList.isReachEnd;
+    }
+  );
+
   const onScrollThreadListEvent = (e: React.UIEvent<HTMLElement>) => {
     if (isScrollReachBottom(e)) {
       const lastLoadedThread =
         threadItemListState[threadItemListState.length - 1];
 
-      if (threadItemListState.length > 0 && match)
+      if (threadItemListState.length > 0 && match && !reachLastThreadState)
         dispatch(
           loadNextThreadPage(String(match.params.topicId), lastLoadedThread._id)
         );

@@ -8,13 +8,21 @@ const threadListSlice = createSlice({
   initialState: {
     selectedTopic: {},
     threads: [] as IThreadListItem[],
+    isReachEnd: false,
   } as IThreadListComponentState,
   reducers: {
-    setThreadListAndTopic(state, action) {
+    initializeThreadListAndTopic(state, action) {
       return {
         ...state,
         threads: action.payload.threadList,
         selectedTopic: action.payload.selectedTopic,
+        isReachEnd: false,
+      };
+    },
+    setIsReachEnd(state, action) {
+      return {
+        ...state,
+        isReachEnd: action.payload.isReachEnd,
       };
     },
     mergeThreadList(state, action) {
@@ -26,7 +34,7 @@ const threadListSlice = createSlice({
   },
 });
 
-export const { setThreadListAndTopic, mergeThreadList } =
+export const { initializeThreadListAndTopic, mergeThreadList, setIsReachEnd } =
   threadListSlice.actions;
 
 export const initializeThreadList = (topic: string) => {
@@ -38,7 +46,7 @@ export const initializeThreadList = (topic: string) => {
       apiResponse = await threadService.getThreadsByTopic({ topicId: topic });
     }
     dispatch(
-      setThreadListAndTopic({
+      initializeThreadListAndTopic({
         threadList: apiResponse?.threads,
         selectedTopic: apiResponse?.topic,
       })
@@ -58,11 +66,25 @@ export const loadNextThreadPage = (topic: string, lastThreadId: string) => {
       });
     }
 
-    dispatch(
-      mergeThreadList({
-        threadList: apiResponse?.threads,
-      })
-    );
+    if (apiResponse && apiResponse.threads.length > 0) {
+      dispatch(
+        mergeThreadList({
+          threadList: apiResponse.threads,
+        })
+      );
+
+      dispatch(
+        setIsReachEnd({
+          isReachEnd: false,
+        })
+      );
+    } else {
+      dispatch(
+        setIsReachEnd({
+          isReachEnd: true,
+        })
+      );
+    }
   };
 };
 

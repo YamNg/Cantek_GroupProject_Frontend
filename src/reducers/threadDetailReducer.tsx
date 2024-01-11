@@ -14,6 +14,7 @@ const threadDetailSlice = createSlice({
     pages: [] as IThreadDetailComponentPage[],
     totalPage: 0,
     pageSize: 0,
+    isReachEnd: false,
   } as IThreadDetailComponentState,
   reducers: {
     setThreadDetail(state, action) {
@@ -59,19 +60,44 @@ const threadDetailSlice = createSlice({
         pages: newPageList,
       };
     },
-    resetThreadDetail(state) {
-      state._id = "";
-      state.title = "";
-      state.pages = [];
-      state.totalPage = 0;
-      state.pageSize = 0;
+    setIsReachEnd(state, action) {
+      return {
+        ...state,
+        isReachEnd: action.payload.isReachEnd,
+      };
+    },
+    resetThreadDetail() {
+      return {
+        _id: "",
+        title: "",
+        pages: [],
+        totalPage: 0,
+        pageSize: 0,
+        isReachEnd: false,
+      };
     },
   },
 });
 
-export const { setThreadDetail, resetThreadDetail } = threadDetailSlice.actions;
+export const { setThreadDetail, resetThreadDetail, setIsReachEnd } =
+  threadDetailSlice.actions;
 
-export const initializeThreadDetail = (threadId: string, pageNum: number) => {
+export const appendCommentPage = (threadId: string, pageNum: number) => {
+  return async (dispatch: Dispatch) => {
+    const apiResponse = await threadService.getThreadDetail({
+      threadId,
+      pageNum,
+    });
+    dispatch(setThreadDetail(apiResponse));
+    if (apiResponse.body?.totalPage === pageNum) {
+      dispatch(setIsReachEnd({ isReachEnd: true }));
+    } else {
+      dispatch(setIsReachEnd({ isReachEnd: false }));
+    }
+  };
+};
+
+export const prependCommentPage = (threadId: string, pageNum: number) => {
   return async (dispatch: Dispatch) => {
     const apiResponse = await threadService.getThreadDetail({
       threadId,
