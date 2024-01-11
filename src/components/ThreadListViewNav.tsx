@@ -5,7 +5,7 @@ import hamburgerLogo from "../assets/icon/hamburger.svg";
 import refreshLogo from "../assets/icon/refresh.svg";
 import addPostLogo from "../assets/icon/add-post.svg";
 import beerCanLogo from "../assets/icon/can-of-beer.svg";
-import { IThreadList } from "../models/component/thread-list.component.interface";
+import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
 import { useMatch } from "react-router-dom";
 import { initializeThreadList } from "../reducers/threadListReducer";
 
@@ -18,7 +18,7 @@ const ThreadListViewNav = () => {
     : "latest";
 
   const threadListState = useSelector(
-    ({ threadList }: { threadList: IThreadList }) => {
+    ({ threadList }: { threadList: IThreadListComponentState }) => {
       return threadList;
     }
   );

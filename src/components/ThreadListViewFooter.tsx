@@ -14,7 +14,7 @@ const ThreadListViewFooter = () => {
   const match = useMatch("/topic/:topicId");
 
   return (
-    <div className="flex fixed h-10 w-full bottom-0 bg-gray-950 md:hidden">
+    <div className="flex fixed h-10 w-full bottom-0 bg-gray-900/95 md:hidden">
       <div
         className="grow flex items-center justify-center cursor-pointer hover:bg-gray-800"
         onClick={() => dispatch(menuNegateActive())}

@@ -1,18 +1,24 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { IMenu } from "../models/component/menu.component.interface";
+import { IMenuComponentState } from "../models/component/menu.component.interface";
 import { ISection } from "../models/api/section.api.interface";
 import { ITopic } from "../models/api/topic.api.interface";
-import { IThreadList } from "../models/component/thread-list.component.interface";
+import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
+import { resetThreadDetail } from "../reducers/threadDetailReducer";
+import { AppDispatch } from "../config/store";
 
 const MenuSectionList = () => {
-  const menuState = useSelector(({ menu }: { menu: IMenu }) => {
-    return menu;
-  });
+  const dispatch: AppDispatch = useDispatch();
 
-  const threadListState = useSelector(
-    ({ threadList }: { threadList: IThreadList }) => {
-      return threadList;
+  const menuListState = useSelector(
+    ({ menu }: { menu: IMenuComponentState }) => {
+      return menu.sections;
+    }
+  );
+
+  const threadListTopicState = useSelector(
+    ({ threadList }: { threadList: IThreadListComponentState }) => {
+      return threadList.selectedTopic;
     }
   );
 
@@ -21,18 +27,19 @@ const MenuSectionList = () => {
       <div className="grid grid-cols-2 p-4">
         <Link
           className={`text-lg pl-2 ${
-            threadListState.selectedTopic?._id
+            threadListTopicState?._id
               ? "text-white"
               : "text-amber-300 pointer-events-none"
           }`}
           to={`/topic/latest`}
+          onClick={() => dispatch(resetThreadDetail())}
         >
           Latest Threads
         </Link>
       </div>
 
-      {menuState.sections ? (
-        menuState.sections.map((section: ISection) => {
+      {menuListState ? (
+        menuListState.map((section: ISection) => {
           return (
             <div key={section._id} className="grid grid-cols-2 p-4 text-white">
               <div className="text-sm col-span-2 text-stone-400 pb-2">
@@ -43,11 +50,12 @@ const MenuSectionList = () => {
                   <Link
                     key={topic._id}
                     className={`text-lg pl-2 pb-2 ${
-                      threadListState.selectedTopic?._id === topic._id
+                      threadListTopicState?._id === topic._id
                         ? "text-amber-300 pointer-events-none"
                         : "text-white"
                     }`}
                     to={`/topic/${topic._id}`}
+                    onClick={() => dispatch(resetThreadDetail())}
                   >
                     {topic.title}
                   </Link>

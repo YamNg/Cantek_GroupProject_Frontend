@@ -10,7 +10,8 @@ import {
 import { useEffect } from "react";
 import ThreadListViewFooter from "./ThreadListViewFooter";
 import { isScrollReachBottom } from "../utils/htmlScrollEventDetector";
-import { IThreadList } from "../models/component/thread-list.component.interface";
+import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
+import { IThreadDetailComponentState } from "../models/component/thread-detail.component.interface";
 
 const ThreadListView = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -24,15 +25,21 @@ const ThreadListView = () => {
     dispatch(initializeThreadList(pathTopicId));
   }, [dispatch, pathTopicId]);
 
-  const threadListState = useSelector(
-    ({ threadList }: { threadList: IThreadList }) => {
-      return threadList;
+  const state = useSelector(
+    ({
+      threadList,
+      threadDetail,
+    }: {
+      threadList: IThreadListComponentState;
+      threadDetail: IThreadDetailComponentState;
+    }) => {
+      return { threadList, threadDetail };
     }
   );
 
   const onScrollThreadListEvent = (e: React.UIEvent<HTMLElement>) => {
     if (isScrollReachBottom(e)) {
-      const threadList = threadListState.threadList;
+      const threadList = state.threadList.threads;
       const lastLoadedThread = threadList[threadList.length - 1];
 
       if (threadList.length > 0 && match)
@@ -44,7 +51,9 @@ const ThreadListView = () => {
 
   return (
     <div
-      className="h-screen min-w-full md:min-w-[30%] md:w-1/2 lg:w-1/3 overflow-y-scroll"
+      className={`${
+        state.threadDetail._id === "" ? "block" : "hidden md:block"
+      } h-screen min-w-full md:min-w-[30%] md:w-1/2 lg:w-1/3 overflow-y-scroll`}
       onScroll={(e) => onScrollThreadListEvent(e)}
     >
       <ThreadListViewNav />

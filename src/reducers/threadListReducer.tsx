@@ -1,5 +1,5 @@
 import { Dispatch, createSlice } from "@reduxjs/toolkit";
-import { IThreadList } from "../models/component/thread-list.component.interface";
+import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
 import { IThreadListItem } from "../models/api/thread-list.api.interface";
 import threadService from "../services/threadService";
 
@@ -7,20 +7,20 @@ const threadListSlice = createSlice({
   name: "threadList",
   initialState: {
     selectedTopic: {},
-    threadList: [] as IThreadListItem[],
-  } as IThreadList,
+    threads: [] as IThreadListItem[],
+  } as IThreadListComponentState,
   reducers: {
     setThreadListAndTopic(state, action) {
       return {
         ...state,
-        threadList: action.payload.threadList,
+        threads: action.payload.threadList,
         selectedTopic: action.payload.selectedTopic,
       };
     },
     mergeThreadList(state, action) {
       return {
         ...state,
-        threadList: state.threadList.concat(action.payload.threadList),
+        threads: state.threads.concat(action.payload.threadList),
       };
     },
   },

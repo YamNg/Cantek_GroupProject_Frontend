@@ -3,6 +3,7 @@ import ThreadListView from "../components/ThreadListView";
 import { useEffect } from "react";
 import { initializeMenu } from "../reducers/menuReducer";
 import { AppDispatch } from "../config/store";
+import ThreadDetailView from "../components/ThreadDetailView";
 
 const ForumMainPage = () => {
   // trigger actions to load default data to setup the app
@@ -14,6 +15,7 @@ const ForumMainPage = () => {
   return (
     <>
       <ThreadListView />
+      <ThreadDetailView />
     </>
   );
 };

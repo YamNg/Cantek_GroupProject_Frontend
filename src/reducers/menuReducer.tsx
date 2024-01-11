@@ -1,14 +1,14 @@
 import { Dispatch, createSlice } from "@reduxjs/toolkit";
-import { IMenu } from "../models/component/menu.component.interface";
+import { IMenuComponentState } from "../models/component/menu.component.interface";
 import { ISection } from "../models/api/section.api.interface";
 import sectionService from "../services/sectionService";
 
 const menuSlice = createSlice({
   name: "menu",
   initialState: {
-    isActive: true,
+    isActive: false,
     sections: [] as ISection[],
-  } as IMenu,
+  } as IMenuComponentState,
   reducers: {
     menuNegateActive(state) {
       return { ...state, isActive: !state.isActive };

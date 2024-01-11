@@ -15,6 +15,10 @@ const App = () => {
           path="/topic/:topicId/thread/:thread"
           element={<ForumMainPage />}
         />
+        <Route
+          path="/topic/:topicId/thread/:thread/page/:pageNumber"
+          element={<ForumMainPage />}
+        />
       </Routes>
     </div>
   );

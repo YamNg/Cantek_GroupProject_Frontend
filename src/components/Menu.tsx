@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
-import { IMenu } from "../models/component/menu.component.interface";
+import { IMenuComponentState } from "../models/component/menu.component.interface";
 import MenuNav from "./MenuNav";
 import MenuFooter from "./MenuFooter";
 import MenuSectionList from "./MenuSectionList";
 import MenuOverlay from "./MenuOverlay";
 
 const Menu = () => {
-  const menuState = useSelector(({ menu }: { menu: IMenu }) => {
+  const menuState = useSelector(({ menu }: { menu: IMenuComponentState }) => {
     return menu;
   });
 

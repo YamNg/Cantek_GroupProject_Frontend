@@ -1,6 +1,7 @@
 import axios from "axios";
 import { IApiResponse } from "../models/api/api-response.api.interface";
 import { IThreadListApiResponse } from "../models/api/thread-list.api.interface";
+import { IThreadDetail } from "../models/api/thread-detail.api.interface";
 
 const baseUrl = "http://localhost:3000/forum";
 const threadUrl = `${baseUrl}/thread`;
@@ -33,4 +34,20 @@ const getThreadsByTopic = async ({
   return data.body;
 };
 
-export default { getThreadsByTopic, getLatestThreads };
+const getThreadDetail = async ({
+  threadId,
+  pageNum,
+}: {
+  threadId: string;
+  pageNum: number;
+}): Promise<{ body?: IThreadDetail; pageNum: number }> => {
+  const requestUrl = `${threadUrl}/${threadId}/page/${pageNum}`;
+
+  const { data }: { data: IApiResponse<IThreadDetail> } = await axios.get(
+    requestUrl
+  );
+
+  return { body: data.body, pageNum };
+};
+
+export default { getThreadsByTopic, getLatestThreads, getThreadDetail };
