@@ -3,7 +3,7 @@ import { IApiResponse } from "../models/api/api-response.api.interface";
 import { IThreadListApiResponse } from "../models/api/thread-list.api.interface";
 import { IThreadDetail } from "../models/api/thread-detail.api.interface";
 
-const baseUrl = "http://localhost:3000/forum";
+const baseUrl = import.meta.env.VITE_FORUM_BASE_URL;
 const threadUrl = `${baseUrl}/thread`;
 
 const getLatestThreads = async ({

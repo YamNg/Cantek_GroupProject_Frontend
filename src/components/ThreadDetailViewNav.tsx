@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IThreadDetailComponentState } from "../models/component/thread-detail.component.interface";
 import { AppDispatch } from "../config/store";
 import { resetThreadDetail } from "../reducers/threadDetailReducer";
-import { Link, useMatch, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const ThreadDetailViewNav = () => {
   const dispatch: AppDispatch = useDispatch();

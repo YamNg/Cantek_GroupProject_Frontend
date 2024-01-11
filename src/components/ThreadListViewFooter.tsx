@@ -11,7 +11,7 @@ import { initializeThreadList } from "../reducers/threadListReducer";
 const ThreadListViewFooter = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const match = useMatch("/topic/:topicId");
+  const match = useMatch("/topic/:topicId/*");
 
   return (
     <div className="flex fixed h-10 w-full bottom-0 bg-gray-900/95 md:hidden">
