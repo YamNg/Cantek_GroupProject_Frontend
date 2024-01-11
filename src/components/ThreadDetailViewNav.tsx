@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IThreadDetailComponentState } from "../models/component/thread-detail.component.interface";
 import { AppDispatch } from "../config/store";
 import { resetThreadDetail } from "../reducers/threadDetailReducer";
-import { Link, useMatch } from "react-router-dom";
+import { Link, useMatch, useParams } from "react-router-dom";
 
 const ThreadDetailViewNav = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -16,15 +16,14 @@ const ThreadDetailViewNav = () => {
     }
   );
 
-  const match = useMatch("/topic/:topicId/thread/:threadId/page/:pageNum");
-  const pathTopicId = match?.params.topicId;
+  const { topicId } = useParams();
 
   return (
     <div className="top-0 h-10 z-20 w-full fixed bg-white text-white md:w-1/2 lg:w-2/3">
       <div className="flex bg-gray-900/95 items-center">
         <div className="p-2 cursor-pointer hover:bg-gray-700 md:hidden">
           <Link
-            to={`/topic/${pathTopicId}`}
+            to={`/topic/${topicId}`}
             onClick={() => dispatch(resetThreadDetail())}
           >
             <div className="flex">

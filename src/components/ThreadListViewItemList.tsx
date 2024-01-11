@@ -54,7 +54,7 @@ const ThreadListViewItemList = () => {
               }`}
               to={`/topic/${
                 state.threadList.selectedTopic?._id ?? "latest"
-              }/thread/${thread._id}/page/1`}
+              }/thread/${thread._id}`}
             ></Link>
           </div>
         );

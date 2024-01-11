@@ -12,7 +12,11 @@ const App = () => {
         <Route path="/" element={<Navigate replace to="/topic/latest" />} />
         <Route path="/topic/:topicId" element={<ForumMainPage />} />
         <Route
-          path="/topic/:topicId/thread/:thread/page/:pageNum"
+          path="/topic/:topicId/thread/:thread"
+          element={<ForumMainPage />}
+        />
+        <Route
+          path="/topic/:topicId/thread/:thread/page/:pageNumber"
           element={<ForumMainPage />}
         />
       </Routes>
