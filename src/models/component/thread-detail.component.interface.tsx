@@ -6,6 +6,7 @@ export interface IThreadDetailComponentState {
   totalPage: number;
   pageSize: number;
   pages: IThreadDetailComponentPage[];
+  isReachEnd: boolean;
 }
 
 export interface IThreadDetailComponentPage {

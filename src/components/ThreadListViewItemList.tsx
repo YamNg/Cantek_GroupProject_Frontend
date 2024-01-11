@@ -1,12 +1,16 @@
 import thumbUpLogo from "../assets/icon/thumb-up.svg";
 import thumbDownLogo from "../assets/icon/thumb-down.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
 import { dateStringFormatter } from "../utils/dateStringFormatter";
 import { Link } from "react-router-dom";
 import { IThreadDetailComponentState } from "../models/component/thread-detail.component.interface";
+import { resetThreadDetail } from "../reducers/threadDetailReducer";
+import { AppDispatch } from "../config/store";
 
 const ThreadListViewItemList = () => {
+  const dispatch: AppDispatch = useDispatch();
+
   const threadDetailIdState = useSelector(
     ({ threadDetail }: { threadDetail: IThreadDetailComponentState }) => {
       return threadDetail._id;
@@ -55,6 +59,7 @@ const ThreadListViewItemList = () => {
               to={`/topic/${
                 threadItemListState.selectedTopic?._id ?? "latest"
               }/thread/${thread._id}`}
+              onClick={() => dispatch(resetThreadDetail())}
             ></Link>
           </div>
         );
