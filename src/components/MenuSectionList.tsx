@@ -1,17 +1,17 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { IMenu } from "../models/component/menu.component.interface";
+import { IMenuComponentState } from "../models/component/menu.component.interface";
 import { ISection } from "../models/api/section.api.interface";
 import { ITopic } from "../models/api/topic.api.interface";
-import { IThreadList } from "../models/component/thread-list.component.interface";
+import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
 
 const MenuSectionList = () => {
-  const menuState = useSelector(({ menu }: { menu: IMenu }) => {
+  const menuState = useSelector(({ menu }: { menu: IMenuComponentState }) => {
     return menu;
   });
 
   const threadListState = useSelector(
-    ({ threadList }: { threadList: IThreadList }) => {
+    ({ threadList }: { threadList: IThreadListComponentState }) => {
       return threadList;
     }
   );

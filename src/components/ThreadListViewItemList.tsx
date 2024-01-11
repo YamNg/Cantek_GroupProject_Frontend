@@ -1,13 +1,13 @@
 import thumbUpLogo from "../assets/icon/thumb-up.svg";
 import thumbDownLogo from "../assets/icon/thumb-down.svg";
 import { useSelector } from "react-redux";
-import { IThreadList } from "../models/component/thread-list.component.interface";
+import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
 import { dateStringFormatter } from "../utils/dateStringFormatter";
 import { Link } from "react-router-dom";
 
 const ThreadListViewItemList = () => {
   const { threadList, selectedTopic } = useSelector(
-    ({ threadList }: { threadList: IThreadList }) => {
+    ({ threadList }: { threadList: IThreadListComponentState }) => {
       return threadList;
     }
   );

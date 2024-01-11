@@ -1,7 +1,7 @@
 import { IThreadListItem } from "../api/thread-list.api.interface";
 import { ITopic } from "../api/topic.api.interface";
 
-export interface IThreadList {
+export interface IThreadListComponentState {
   selectedTopic: ITopic;
   threadList: IThreadListItem[];
 }
