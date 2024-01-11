@@ -7,21 +7,21 @@ import { Link } from "react-router-dom";
 import { IThreadDetailComponentState } from "../models/component/thread-detail.component.interface";
 
 const ThreadListViewItemList = () => {
-  const state = useSelector(
-    ({
-      threadList,
-      threadDetail,
-    }: {
-      threadList: IThreadListComponentState;
-      threadDetail: IThreadDetailComponentState;
-    }) => {
-      return { threadList, threadDetail };
+  const threadDetailIdState = useSelector(
+    ({ threadDetail }: { threadDetail: IThreadDetailComponentState }) => {
+      return threadDetail._id;
+    }
+  );
+
+  const threadItemListState = useSelector(
+    ({ threadList }: { threadList: IThreadListComponentState }) => {
+      return threadList;
     }
   );
 
   return (
     <div className="flex flex-col mt-10 mb-10 md:mb-0 w-full">
-      {state.threadList.threads.map((thread) => {
+      {threadItemListState.threads.map((thread) => {
         return (
           <div
             key={thread._id}
@@ -48,12 +48,12 @@ const ThreadListViewItemList = () => {
             </span>
             <Link
               className={`absolute top-0 left-0 w-full h-full hover:bg-blue-900/10 ${
-                thread._id === state.threadDetail._id
+                thread._id === threadDetailIdState
                   ? "bg-blue-900/30 pointer-events-none"
                   : ""
               }`}
               to={`/topic/${
-                state.threadList.selectedTopic?._id ?? "latest"
+                threadItemListState.selectedTopic?._id ?? "latest"
               }/thread/${thread._id}`}
             ></Link>
           </div>

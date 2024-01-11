@@ -10,15 +10,15 @@ const ThreadDetailViewCommentList = () => {
   const { thread: threadId, pageNumber } = useParams();
   const pageDivKey = threadId + (pageNumber ? "-" + pageNumber : "");
 
-  const state = useSelector(
+  const threadDetailPages = useSelector(
     ({ threadDetail }: { threadDetail: IThreadDetailComponentState }) => {
-      return { threadDetail };
+      return threadDetail.pages;
     }
   );
 
   return (
     <div className="flex flex-col mt-10 mb-10 md:mb-0">
-      {state.threadDetail.pages.map((page) => {
+      {threadDetailPages.map((page) => {
         return (
           <div key={pageDivKey}>
             <h1>Page {page.pageNumber}</h1>

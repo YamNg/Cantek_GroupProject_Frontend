@@ -6,14 +6,16 @@ import MenuSectionList from "./MenuSectionList";
 import MenuOverlay from "./MenuOverlay";
 
 const Menu = () => {
-  const menuState = useSelector(({ menu }: { menu: IMenuComponentState }) => {
-    return menu;
-  });
+  const menuActiveState = useSelector(
+    ({ menu }: { menu: IMenuComponentState }) => {
+      return menu.isActive;
+    }
+  );
 
   return (
     <div
       className={`${
-        menuState.isActive ? "flex" : "hidden"
+        menuActiveState ? "flex" : "hidden"
       } fixed w-full h-full z-50 `}
     >
       <div className="h-full w-72 bg-gray-950/80 backdrop-blur">

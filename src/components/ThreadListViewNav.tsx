@@ -12,7 +12,7 @@ import { initializeThreadList } from "../reducers/threadListReducer";
 const ThreadListViewNav = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const match = useMatch("/topic/:topicId");
+  const match = useMatch("/topic/:topicId/*");
   const topicId = match?.params.topicId
     ? String(match.params.topicId)
     : "latest";
