@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { IMenuComponentState } from "../models/component/menu.component.interface";
+import { IMenuComponentState } from "../models/component/menu.component";
 import { ISection } from "../models/api/section.api.interface";
 import { ITopic } from "../models/api/topic.api.interface";
-import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
+import { IThreadListComponentState } from "../models/component/thread-list.component";
 import { resetThreadDetail } from "../reducers/threadDetailReducer";
 import { AppDispatch } from "../config/store";
 import { menuNegateActive } from "../reducers/menuReducer";

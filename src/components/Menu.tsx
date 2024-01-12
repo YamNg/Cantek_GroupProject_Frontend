@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { IMenuComponentState } from "../models/component/menu.component.interface";
+import { IMenuComponentState } from "../models/component/menu.component";
 import MenuNav from "./MenuNav";
 import MenuFooter from "./MenuFooter";
 import MenuSectionList from "./MenuSectionList";

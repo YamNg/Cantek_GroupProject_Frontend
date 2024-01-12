@@ -2,7 +2,7 @@ import thumbUpLogo from "../assets/icon/thumb-up.svg";
 import thumbDownLogo from "../assets/icon/thumb-down.svg";
 import loadListLogo from "../assets/icon/load-list.svg";
 import replyLogo from "../assets/icon/reply.svg";
-import { IThreadDetailComponentState } from "../models/component/thread-detail.component.interface";
+import { IThreadDetailComponentState } from "../models/component/thread-detail.component";
 import { useDispatch, useSelector } from "react-redux";
 import { dateStringFormatter } from "../utils/dateStringFormatter";
 import { useParams } from "react-router-dom";
@@ -12,6 +12,10 @@ import {
   appendCommentPage,
   prependCommentPage,
 } from "../reducers/threadDetailReducer";
+import { Suspense, lazy } from "react";
+const ThreadDetailViewCommentTree = lazy(
+  () => import("./ThreadDetailViewCommentTree")
+);
 
 const ThreadDetailViewCommentList = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -101,6 +105,15 @@ const ThreadDetailViewCommentList = () => {
                         height="40px"
                       />
                     </div>
+                    <Suspense
+                      fallback={
+                        <>
+                          <p>Loading</p>
+                        </>
+                      }
+                    >
+                      <ThreadDetailViewCommentTree data={comment} />
+                    </Suspense>
                     <span className="max-h-24 overflow-hidden break-words">
                       {comment.content}
                     </span>

@@ -5,7 +5,7 @@ import hamburgerLogo from "../assets/icon/hamburger.svg";
 import refreshLogo from "../assets/icon/refresh.svg";
 import addPostLogo from "../assets/icon/add-post.svg";
 import beerCanLogo from "../assets/icon/can-of-beer.svg";
-import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
+import { IThreadListComponentState } from "../models/component/thread-list.component";
 import { useMatch } from "react-router-dom";
 import { initializeThreadList } from "../reducers/threadListReducer";
 

@@ -2,7 +2,7 @@ import { Dispatch, createSlice } from "@reduxjs/toolkit";
 import {
   IThreadDetailComponentPage,
   IThreadDetailComponentState,
-} from "../models/component/thread-detail.component.interface";
+} from "../models/component/thread-detail.component";
 import threadService from "../services/threadService";
 import { IThreadDetail } from "../models/api/thread-detail.api.interface";
 
@@ -29,19 +29,29 @@ const threadDetailSlice = createSlice({
       };
 
       let newPageList = [] as IThreadDetailComponentPage[];
-      if (
-        state.pages.findIndex((page) => page.pageNumber === pageNumber) === -1
-      ) {
+      const existingPageIndex = state.pages.findIndex(
+        (page) => page.pageNumber === pageNumber
+      );
+
+      if (existingPageIndex === -1) {
         // new page
         newPageList = state.pages.concat({
           pageNumber,
-          comments: pageObj.comments,
+          comments: pageObj.comments.map(({ ...commentObj }) => {
+            return { ...commentObj, ancestorTree: [] };
+          }),
         });
       } else {
+        const savedPage = state.pages[existingPageIndex];
+
         // existing page
         const updatedPage = {
           pageNumber,
-          comments: pageObj.comments,
+          comments: pageObj.comments.map(({ ...commentObj }, index) => {
+            if (index > savedPage.comments.length - 1)
+              return { ...commentObj, ancestorTree: [] };
+            else return savedPage.comments[index];
+          }),
         };
         newPageList = state.pages.map((page) =>
           page.pageNumber !== pageNumber ? page : updatedPage

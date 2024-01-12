@@ -1,5 +1,5 @@
 import { Dispatch, createSlice } from "@reduxjs/toolkit";
-import { IMenuComponentState } from "../models/component/menu.component.interface";
+import { IMenuComponentState } from "../models/component/menu.component";
 import { ISection } from "../models/api/section.api.interface";
 import sectionService from "../services/sectionService";
 

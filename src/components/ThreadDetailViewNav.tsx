@@ -2,7 +2,7 @@ import addCommentLogo from "../assets/icon/comment-add.svg";
 import elevatorLogo from "../assets/icon/elevator.svg";
 import arrowLeftLogo from "../assets/icon/arrow-left.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { IThreadDetailComponentState } from "../models/component/thread-detail.component.interface";
+import { IThreadDetailComponentState } from "../models/component/thread-detail.component";
 import { AppDispatch } from "../config/store";
 import { resetThreadDetail } from "../reducers/threadDetailReducer";
 import { Link, useParams } from "react-router-dom";
