@@ -4,6 +4,7 @@ import {
   IThreadDetailComponentState,
 } from "../models/component/thread-detail.component";
 import threadService from "../services/threadService";
+import commentService from "../services/commentService";
 import { IThreadDetail } from "../models/api/thread-detail.api.interface";
 
 const threadDetailSlice = createSlice({
@@ -70,6 +71,50 @@ const threadDetailSlice = createSlice({
         pages: newPageList,
       };
     },
+    setCommentAncestorDetail(state, action) {
+      const {
+        pageNum,
+        commentId,
+        ancestorTree: inputAncestorTree,
+      } = action.payload;
+
+      const existingPage = state.pages.find(
+        (page) => page.pageNumber === pageNum
+      );
+      if (existingPage) {
+        const existingComment = existingPage.comments.find(
+          (comment) => comment._id === commentId
+        );
+        if (existingComment) {
+          const newAncestorTree = [
+            ...existingComment.ancestorTree,
+            ...inputAncestorTree,
+          ];
+
+          const newComment = {
+            ...existingComment,
+            ancestorTree: newAncestorTree,
+          };
+
+          const newPage = {
+            ...existingPage,
+            comments: existingPage.comments.map((cm) =>
+              cm._id === existingComment._id ? newComment : cm
+            ),
+          };
+
+          const newPageList = state.pages.map((page) =>
+            page.pageNumber === existingPage.pageNumber ? newPage : page
+          );
+
+          return {
+            ...state,
+            pages: newPageList,
+          };
+        }
+      }
+      return state;
+    },
     setIsReachEnd(state, action) {
       return {
         ...state,
@@ -89,8 +134,12 @@ const threadDetailSlice = createSlice({
   },
 });
 
-export const { setThreadDetail, resetThreadDetail, setIsReachEnd } =
-  threadDetailSlice.actions;
+export const {
+  setThreadDetail,
+  resetThreadDetail,
+  setIsReachEnd,
+  setCommentAncestorDetail,
+} = threadDetailSlice.actions;
 
 export const appendCommentPage = (threadId: string, pageNum: number) => {
   return async (dispatch: Dispatch) => {
@@ -114,6 +163,29 @@ export const prependCommentPage = (threadId: string, pageNum: number) => {
       pageNum,
     });
     dispatch(setThreadDetail(apiResponse));
+  };
+};
+
+export const loadCommentAncestor = ({
+  pageNum,
+  commentId,
+  ancestorIds,
+}: {
+  pageNum: number;
+  commentId: string;
+  ancestorIds: string[];
+}) => {
+  return async (dispatch: Dispatch) => {
+    const apiResponse = await commentService.getCommentInBatch({
+      commentIds: ancestorIds,
+    });
+    dispatch(
+      setCommentAncestorDetail({
+        pageNum,
+        commentId,
+        ancestorTree: apiResponse,
+      })
+    );
   };
 };
 

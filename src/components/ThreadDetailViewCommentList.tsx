@@ -112,7 +112,10 @@ const ThreadDetailViewCommentList = () => {
                         </>
                       }
                     >
-                      <ThreadDetailViewCommentTree data={comment} />
+                      <ThreadDetailViewCommentTree
+                        data={comment}
+                        pageNum={page.pageNumber}
+                      />
                     </Suspense>
                     <span className="max-h-24 overflow-hidden break-words">
                       {comment.content}
