@@ -6,6 +6,7 @@ import { ITopic } from "../models/api/topic.api.interface";
 import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
 import { resetThreadDetail } from "../reducers/threadDetailReducer";
 import { AppDispatch } from "../config/store";
+import { menuNegateActive } from "../reducers/menuReducer";
 
 const MenuSectionList = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -32,7 +33,10 @@ const MenuSectionList = () => {
               : "text-amber-300 pointer-events-none"
           }`}
           to={`/topic/latest`}
-          onClick={() => dispatch(resetThreadDetail())}
+          onClick={() => {
+            dispatch(resetThreadDetail());
+            dispatch(menuNegateActive());
+          }}
         >
           Latest Threads
         </Link>
@@ -55,7 +59,10 @@ const MenuSectionList = () => {
                         : "text-white"
                     }`}
                     to={`/topic/${topic._id}`}
-                    onClick={() => dispatch(resetThreadDetail())}
+                    onClick={() => {
+                      dispatch(resetThreadDetail());
+                      dispatch(menuNegateActive());
+                    }}
                   >
                     {topic.title}
                   </Link>
