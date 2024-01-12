@@ -2,8 +2,9 @@ import { Dispatch, createSlice } from "@reduxjs/toolkit";
 import {
   IThreadDetailComponentPage,
   IThreadDetailComponentState,
-} from "../models/component/thread-detail.component.interface";
+} from "../models/component/thread-detail.component";
 import threadService from "../services/threadService";
+import commentService from "../services/commentService";
 import { IThreadDetail } from "../models/api/thread-detail.api.interface";
 
 const threadDetailSlice = createSlice({
@@ -29,19 +30,29 @@ const threadDetailSlice = createSlice({
       };
 
       let newPageList = [] as IThreadDetailComponentPage[];
-      if (
-        state.pages.findIndex((page) => page.pageNumber === pageNumber) === -1
-      ) {
+      const existingPageIndex = state.pages.findIndex(
+        (page) => page.pageNumber === pageNumber
+      );
+
+      if (existingPageIndex === -1) {
         // new page
         newPageList = state.pages.concat({
           pageNumber,
-          comments: pageObj.comments,
+          comments: pageObj.comments.map(({ ...commentObj }) => {
+            return { ...commentObj, ancestorTree: [] };
+          }),
         });
       } else {
+        const savedPage = state.pages[existingPageIndex];
+
         // existing page
         const updatedPage = {
           pageNumber,
-          comments: pageObj.comments,
+          comments: pageObj.comments.map(({ ...commentObj }, index) => {
+            if (index > savedPage.comments.length - 1)
+              return { ...commentObj, ancestorTree: [] };
+            else return savedPage.comments[index];
+          }),
         };
         newPageList = state.pages.map((page) =>
           page.pageNumber !== pageNumber ? page : updatedPage
@@ -59,6 +70,50 @@ const threadDetailSlice = createSlice({
         ...result,
         pages: newPageList,
       };
+    },
+    setCommentAncestorDetail(state, action) {
+      const {
+        pageNum,
+        commentId,
+        ancestorTree: inputAncestorTree,
+      } = action.payload;
+
+      const existingPage = state.pages.find(
+        (page) => page.pageNumber === pageNum
+      );
+      if (existingPage) {
+        const existingComment = existingPage.comments.find(
+          (comment) => comment._id === commentId
+        );
+        if (existingComment) {
+          const newAncestorTree = [
+            ...existingComment.ancestorTree,
+            ...inputAncestorTree,
+          ];
+
+          const newComment = {
+            ...existingComment,
+            ancestorTree: newAncestorTree,
+          };
+
+          const newPage = {
+            ...existingPage,
+            comments: existingPage.comments.map((cm) =>
+              cm._id === existingComment._id ? newComment : cm
+            ),
+          };
+
+          const newPageList = state.pages.map((page) =>
+            page.pageNumber === existingPage.pageNumber ? newPage : page
+          );
+
+          return {
+            ...state,
+            pages: newPageList,
+          };
+        }
+      }
+      return state;
     },
     setIsReachEnd(state, action) {
       return {
@@ -79,8 +134,12 @@ const threadDetailSlice = createSlice({
   },
 });
 
-export const { setThreadDetail, resetThreadDetail, setIsReachEnd } =
-  threadDetailSlice.actions;
+export const {
+  setThreadDetail,
+  resetThreadDetail,
+  setIsReachEnd,
+  setCommentAncestorDetail,
+} = threadDetailSlice.actions;
 
 export const appendCommentPage = (threadId: string, pageNum: number) => {
   return async (dispatch: Dispatch) => {
@@ -104,6 +163,29 @@ export const prependCommentPage = (threadId: string, pageNum: number) => {
       pageNum,
     });
     dispatch(setThreadDetail(apiResponse));
+  };
+};
+
+export const loadCommentAncestor = ({
+  pageNum,
+  commentId,
+  ancestorIds,
+}: {
+  pageNum: number;
+  commentId: string;
+  ancestorIds: string[];
+}) => {
+  return async (dispatch: Dispatch) => {
+    const apiResponse = await commentService.getCommentInBatch({
+      commentIds: ancestorIds,
+    });
+    dispatch(
+      setCommentAncestorDetail({
+        pageNum,
+        commentId,
+        ancestorTree: apiResponse,
+      })
+    );
   };
 };
 

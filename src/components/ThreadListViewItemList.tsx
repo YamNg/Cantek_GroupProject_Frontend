@@ -1,10 +1,10 @@
 import thumbUpLogo from "../assets/icon/thumb-up.svg";
 import thumbDownLogo from "../assets/icon/thumb-down.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
+import { IThreadListComponentState } from "../models/component/thread-list.component";
 import { dateStringFormatter } from "../utils/dateStringFormatter";
 import { Link } from "react-router-dom";
-import { IThreadDetailComponentState } from "../models/component/thread-detail.component.interface";
+import { IThreadDetailComponentState } from "../models/component/thread-detail.component";
 import { resetThreadDetail } from "../reducers/threadDetailReducer";
 import { AppDispatch } from "../config/store";
 

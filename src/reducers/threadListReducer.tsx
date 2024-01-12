@@ -1,5 +1,5 @@
 import { Dispatch, createSlice } from "@reduxjs/toolkit";
-import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
+import { IThreadListComponentState } from "../models/component/thread-list.component";
 import { IThreadListItem } from "../models/api/thread-list.api.interface";
 import threadService from "../services/threadService";
 

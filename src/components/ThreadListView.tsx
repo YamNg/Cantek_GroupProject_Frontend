@@ -10,8 +10,8 @@ import {
 import { useEffect } from "react";
 import ThreadListViewFooter from "./ThreadListViewFooter";
 import { isScrollReachBottom } from "../utils/htmlScrollEventDetector";
-import { IThreadListComponentState } from "../models/component/thread-list.component.interface";
-import { IThreadDetailComponentState } from "../models/component/thread-detail.component.interface";
+import { IThreadListComponentState } from "../models/component/thread-list.component";
+import { IThreadDetailComponentState } from "../models/component/thread-detail.component";
 
 const ThreadListView = () => {
   const dispatch: AppDispatch = useDispatch();

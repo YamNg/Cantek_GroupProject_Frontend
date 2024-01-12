@@ -1,4 +1,4 @@
-import { IComment } from "../api/comment.api.interface";
+import { ICommentComponent } from "./comment.component";
 
 export interface IThreadDetailComponentState {
   _id: string;
@@ -11,5 +11,5 @@ export interface IThreadDetailComponentState {
 
 export interface IThreadDetailComponentPage {
   pageNumber: number;
-  comments: IComment[];
+  comments: ICommentComponent[];
 }

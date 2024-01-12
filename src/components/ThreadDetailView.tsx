@@ -6,7 +6,7 @@ import { appendCommentPage } from "../reducers/threadDetailReducer";
 import ThreadDetailViewNav from "./ThreadDetailViewNav";
 import { useParams } from "react-router-dom";
 import { isScrollReachBottom } from "../utils/htmlScrollEventDetector";
-import { IThreadDetailComponentState } from "../models/component/thread-detail.component.interface";
+import { IThreadDetailComponentState } from "../models/component/thread-detail.component";
 
 const ThreadDetailView = () => {
   const dispatch: AppDispatch = useDispatch();
