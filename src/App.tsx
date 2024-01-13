@@ -13,44 +13,67 @@ import replyWriteLogo from "./assets/icon/reply-white.svg";
 import thumbUpWhiteLogo from "./assets/icon/thumb-up-white.svg";
 import thumbDownWhiteLogo from "./assets/icon/thumb-down-white.svg";
 import dialogLogo from "./assets/icon/dialog.svg";
+import cheersLogo from "./assets/icon/beer-cheers.svg";
+import errorLogo from "./assets/icon/error.svg";
 
 function App() {
   return (
     <div className="flex overflow-x-hidden">
+      {true && (
+        <div className="fixed inset-0 z-50 flex justify-center items-center">
+          <div className="h-60 w-60 bg-white border-2 border-black backdrop-blur rounded-lg flex flex-col justify-center items-center p-2">
+            <img src={cheersLogo} className="h-32 w-32" alt="arrow" />
+            <div>Request Success</div>
+            <div>Cheers!</div>
+          </div>
+        </div>
+      )}
+
+      {false && (
+        <div className="fixed inset-0 z-50 flex justify-center items-center">
+          <div className="h-60 w-fit bg-white border-2 border-black backdrop-blur rounded-lg flex flex-col justify-center items-center p-2">
+            <img src={errorLogo} className="h-32 w-32" alt="arrow" />
+            <div>Request Failed</div>
+            <div>INCORRECT_USER_EMAIL_OR_PASSWORD</div>
+          </div>
+        </div>
+      )}
+
       {/* login form */}
-      {true && 
+      {false && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
           <div className="bg-white rounded-lg p-4 shadow-lg max-w-md w-full mx-4 md:mx-0">
-          <form className="flex flex-col space-y-4">
-            <input
-              type="email"
-              placeholder="Email"
-              className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black"
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black"
-            />
-            <div className="flex justify-between pt-4">
-              <button
-                type="button" // Change to "button" if this doesn't submit the form
-                className="px-4 py-2 bg-white text-black rounded-md hover:bg-gray-200 w-full mr-2"
-              >
-                Register
-              </button>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-white text-black rounded-md hover:bg-gray-200 w-full ml-2"
-              >
-                Login
-              </button>
-            </div>
-          </form>
+            <form className="flex flex-col space-y-4">
+              <input
+                type="email"
+                placeholder="Email"
+                className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+              />
+              <div className="flex justify-between pt-4">
+                <button
+                  type="button" // Change to "button" if this doesn't submit the form
+                  className="px-4 py-2 bg-white text-black rounded-md hover:bg-gray-200 w-full mr-2"
+                >
+                  Register
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-white text-black rounded-md hover:bg-gray-200 w-full ml-2"
+                >
+                  Login
+                </button>
+              </div>
+            </form>
           </div>
-        </div>}
+        </div>
+      )}
       {/* user login menu */}
-      
+
       {/* left hamburger menu interchange flex <--> hidden to show/hide*/}
       <div className="hidden fixed w-full h-full z-50">
         <div className="h-full w-72 bg-gray-950/80 backdrop-blur">
