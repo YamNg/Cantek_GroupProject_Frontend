@@ -8,6 +8,8 @@ import beerCanLogo from "../assets/icon/can-of-beer.svg";
 import { IThreadListComponentState } from "../models/component/thread-list.component";
 import { useMatch } from "react-router-dom";
 import { initializeThreadList } from "../reducers/threadListReducer";
+import { initializeContentForm } from "../reducers/ContentFormReducer";
+import { ContentCreationFormType } from "../constants/ContentCreationFormType";
 
 const ThreadListViewNav = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -70,17 +72,30 @@ const ThreadListViewNav = () => {
           </div>
         </div>
 
-        <div className="p-2 cursor-pointer hover:bg-gray-700 hidden md:block">
-          <div className="flex">
-            <img
-              src={addPostLogo}
-              className="h-7 w-7"
-              alt="arrow"
-              width="40px"
-              height="40px"
-            />
+        {topicId !== "latest" && (
+          <div
+            className="p-2 cursor-pointer hover:bg-gray-700 hidden md:block"
+            onClick={() =>
+              dispatch(
+                initializeContentForm({
+                  type: ContentCreationFormType.Thread,
+                  itemId: { topicId },
+                  formDisplayTitle: threadListState.selectedTopic.title,
+                })
+              )
+            }
+          >
+            <div className="flex">
+              <img
+                src={addPostLogo}
+                className="h-7 w-7"
+                alt="arrow"
+                width="40px"
+                height="40px"
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

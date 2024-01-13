@@ -13,6 +13,8 @@ import {
   prependCommentPage,
 } from "../reducers/threadDetailReducer";
 import { Suspense, lazy } from "react";
+import { initializeContentForm } from "../reducers/ContentFormReducer";
+import { ContentCreationFormType } from "../constants/ContentCreationFormType";
 const ThreadDetailViewCommentTree = lazy(
   () => import("./ThreadDetailViewCommentTree")
 );
@@ -20,6 +22,12 @@ const ThreadDetailViewCommentTree = lazy(
 const ThreadDetailViewCommentList = () => {
   const dispatch: AppDispatch = useDispatch();
   const { thread: threadId, pageNumber } = useParams();
+
+  const threadDetailTitle = useSelector(
+    ({ threadDetail }: { threadDetail: IThreadDetailComponentState }) => {
+      return threadDetail.title;
+    }
+  );
 
   const threadDetailPages = useSelector(
     ({ threadDetail }: { threadDetail: IThreadDetailComponentState }) => {
@@ -103,6 +111,16 @@ const ThreadDetailViewCommentList = () => {
                         alt="arrow"
                         width="40px"
                         height="40px"
+                        onClick={() =>
+                          dispatch(
+                            initializeContentForm({
+                              type: ContentCreationFormType.ReplyComment,
+                              itemId: { threadId, commentId: comment._id },
+                              formDisplayTitle: threadDetailTitle,
+                              formDisplayContent: comment.content,
+                            })
+                          )
+                        }
                       />
                     </div>
                     <Suspense
