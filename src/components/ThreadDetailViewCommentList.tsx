@@ -10,11 +10,15 @@ import f5ButtonLogo from "../assets/img/f5-key.png";
 import { AppDispatch } from "../config/store";
 import {
   appendCommentPage,
+  downvoteComment,
   prependCommentPage,
+  upvoteComment,
 } from "../reducers/threadDetailReducer";
 import { Suspense, lazy } from "react";
 import { initializeContentForm } from "../reducers/ContentFormReducer";
 import { ContentCreationFormType } from "../constants/ContentCreationFormType";
+import { AxiosError } from "axios";
+import { showResponseMsg } from "../reducers/ResponseMsgReducer";
 const ThreadDetailViewCommentTree = lazy(
   () => import("./ThreadDetailViewCommentTree")
 );
@@ -66,6 +70,35 @@ const ThreadDetailViewCommentList = () => {
     }
 
     if (threadId) dispatch(appendCommentPage(threadId, targetPageNum));
+  };
+
+  const onClickVoteComment = async (
+    commentId: string,
+    pageNumber: number,
+    type: string
+  ) => {
+    try {
+      if (type === "upvote")
+        await dispatch(upvoteComment(commentId, pageNumber));
+      else if (type === "downvote")
+        await dispatch(downvoteComment(commentId, pageNumber));
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        dispatch(
+          showResponseMsg({
+            isSuccess: false,
+            errorMessage: error.response?.data.errorCode,
+          })
+        );
+      } else {
+        dispatch(
+          showResponseMsg({
+            isSuccess: false,
+            errorMessage: "UNKNOWN_ERROR",
+          })
+        );
+      }
+    }
   };
 
   return (
@@ -140,7 +173,16 @@ const ThreadDetailViewCommentList = () => {
                     </span>
                     <div className="flex gap-2">
                       <div className="flex w-max mt-3 p-2 gap-3 border border-black border-solid rounded">
-                        <div className="flex gap-1 items-center">
+                        <div
+                          className="flex gap-1 items-center"
+                          onClick={() =>
+                            onClickVoteComment(
+                              comment._id,
+                              page.pageNumber,
+                              "upvote"
+                            )
+                          }
+                        >
                           <img
                             src={thumbUpLogo}
                             className="h-3 w-3 cursor-pointer hover:invert-[.5]"
@@ -148,7 +190,16 @@ const ThreadDetailViewCommentList = () => {
                           />
                           <span className="text-xs">{comment.upvote}</span>
                         </div>
-                        <div className="flex gap-1 items-center">
+                        <div
+                          className="flex gap-1 items-center"
+                          onClick={() =>
+                            onClickVoteComment(
+                              comment._id,
+                              page.pageNumber,
+                              "downvote"
+                            )
+                          }
+                        >
                           <img
                             src={thumbDownLogo}
                             className="h-3 w-3 cursor-pointer hover:invert-[.5]"

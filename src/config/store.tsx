@@ -3,6 +3,7 @@ import menuReducer from "../reducers/menuReducer";
 import threadListReducer from "../reducers/threadListReducer";
 import threadDetailReducer from "../reducers/threadDetailReducer";
 import ContentFormReducer from "../reducers/ContentFormReducer";
+import responseMsgReducer from "../reducers/ResponseMsgReducer";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     threadList: threadListReducer,
     threadDetail: threadDetailReducer,
     contentForm: ContentFormReducer,
+    responseMsg: responseMsgReducer,
   },
 });
 

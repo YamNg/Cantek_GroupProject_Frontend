@@ -69,13 +69,9 @@ export const createThreadContent = ({
   content: string;
 }) => {
   return async (dispatch: Dispatch) => {
-    try {
-      await threadService.createThread({ topicId, title, content });
-      dispatch(resetFormData());
-      dispatch(contentFormNegateActive());
-    } catch (err) {
-      console.log(JSON.stringify(err));
-    }
+    await threadService.createThread({ topicId, title, content });
+    dispatch(resetFormData());
+    dispatch(contentFormNegateActive());
   };
 };
 
@@ -87,13 +83,9 @@ export const createCommentContent = ({
   content: string;
 }) => {
   return async (dispatch: Dispatch) => {
-    try {
-      await threadService.createThreadComment({ threadId, content });
-      dispatch(resetFormData());
-      dispatch(contentFormNegateActive());
-    } catch (err) {
-      console.log(JSON.stringify(err));
-    }
+    await threadService.createThreadComment({ threadId, content });
+    dispatch(resetFormData());
+    dispatch(contentFormNegateActive());
   };
 };
 
@@ -107,17 +99,13 @@ export const createReplyCommentContent = ({
   content: string;
 }) => {
   return async (dispatch: Dispatch) => {
-    try {
-      await threadService.createThreadReplyComment({
-        threadId,
-        commentId,
-        content,
-      });
-      dispatch(resetFormData());
-      dispatch(contentFormNegateActive());
-    } catch (err) {
-      console.log(JSON.stringify(err));
-    }
+    await threadService.createThreadReplyComment({
+      threadId,
+      commentId,
+      content,
+    });
+    dispatch(resetFormData());
+    dispatch(contentFormNegateActive());
   };
 };
 

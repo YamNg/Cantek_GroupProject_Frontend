@@ -10,6 +10,8 @@ import { AppDispatch } from "../config/store";
 import crossLogo from "../assets/icon/cross.svg";
 import { ContentCreationFormType } from "../constants/ContentCreationFormType";
 import { useState } from "react";
+import { showResponseMsg } from "../reducers/ResponseMsgReducer";
+import { AxiosError } from "axios";
 
 const ContentCreationForm = () => {
   const [formData, setFormData] = useState({ title: "", content: "" });
@@ -29,36 +31,72 @@ const ContentCreationForm = () => {
     setFormData({ ...formData, content: (e.target as HTMLInputElement).value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (contentFormState.type === ContentCreationFormType.Thread) {
-      if (contentFormState.itemId.topicId)
-        dispatch(
-          createThreadContent({
-            topicId: contentFormState.itemId.topicId,
-            title: formData.title,
-            content: formData.content,
-          })
-        );
-    } else if (contentFormState.type === ContentCreationFormType.Comment) {
-      if (contentFormState.itemId.threadId) {
-        dispatch(
-          createCommentContent({
-            threadId: contentFormState.itemId.threadId,
-            content: formData.content,
-          })
-        );
-      }
-    } else if (contentFormState.type === ContentCreationFormType.ReplyComment) {
-      if (
-        contentFormState.itemId.threadId &&
-        contentFormState.itemId.commentId
+  const handleSubmit = async (e: React.FormEvent) => {
+    try {
+      e.preventDefault();
+      if (contentFormState.type === ContentCreationFormType.Thread) {
+        if (contentFormState.itemId.topicId) {
+          await dispatch(
+            createThreadContent({
+              topicId: contentFormState.itemId.topicId,
+              title: formData.title,
+              content: formData.content,
+            })
+          );
+          dispatch(
+            showResponseMsg({
+              isSuccess: true,
+            })
+          );
+        }
+      } else if (contentFormState.type === ContentCreationFormType.Comment) {
+        if (contentFormState.itemId.threadId) {
+          await dispatch(
+            createCommentContent({
+              threadId: contentFormState.itemId.threadId,
+              content: formData.content,
+            })
+          );
+          dispatch(
+            showResponseMsg({
+              isSuccess: true,
+            })
+          );
+        }
+      } else if (
+        contentFormState.type === ContentCreationFormType.ReplyComment
       ) {
+        if (
+          contentFormState.itemId.threadId &&
+          contentFormState.itemId.commentId
+        ) {
+          await dispatch(
+            createReplyCommentContent({
+              threadId: contentFormState.itemId.threadId,
+              commentId: contentFormState.itemId.commentId,
+              content: formData.content,
+            })
+          );
+          dispatch(
+            showResponseMsg({
+              isSuccess: true,
+            })
+          );
+        }
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
         dispatch(
-          createReplyCommentContent({
-            threadId: contentFormState.itemId.threadId,
-            commentId: contentFormState.itemId.commentId,
-            content: formData.content,
+          showResponseMsg({
+            isSuccess: false,
+            errorMessage: error.response?.data.errorCode,
+          })
+        );
+      } else {
+        dispatch(
+          showResponseMsg({
+            isSuccess: false,
+            errorMessage: "UNKNOWN_ERROR",
           })
         );
       }
@@ -67,7 +105,7 @@ const ContentCreationForm = () => {
 
   return (
     contentFormState.isActive && (
-      <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
+      <div className="fixed inset-0 bg-black bg-opacity-50 z-30 flex justify-center items-center">
         <div className="relative bg-white p-4 shadow-lg max-w-4xl w-full mx-4 z-50">
           <div
             className="absolute top-0 right-0 text-2xl text-black p-2"

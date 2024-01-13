@@ -6,6 +6,7 @@ import {
 import threadService from "../services/threadService";
 import commentService from "../services/commentService";
 import { IThreadDetail } from "../models/api/thread-detail.api.interface";
+import { IComment } from "../models/api/comment.api.interface";
 
 const threadDetailSlice = createSlice({
   name: "threadDetail",
@@ -115,6 +116,43 @@ const threadDetailSlice = createSlice({
       }
       return state;
     },
+    setCommentVote(state, action) {
+      const comment: IComment = action.payload.apiResponse;
+      const pageNum: number = action.payload.pageNum;
+
+      const existingPage = state.pages.find(
+        (page) => page.pageNumber === pageNum
+      );
+      if (existingPage) {
+        const existingComment = existingPage.comments.find(
+          (cm) => cm._id === comment._id
+        );
+        if (existingComment) {
+          const newComment = {
+            ...existingComment,
+            upvote: comment.upvote,
+            downvote: comment.downvote,
+          };
+
+          const newPage = {
+            ...existingPage,
+            comments: existingPage.comments.map((cm) =>
+              cm._id === existingComment._id ? newComment : cm
+            ),
+          };
+
+          const newPageList = state.pages.map((page) =>
+            page.pageNumber === existingPage.pageNumber ? newPage : page
+          );
+
+          return {
+            ...state,
+            pages: newPageList,
+          };
+        }
+      }
+      return state;
+    },
     setIsReachEnd(state, action) {
       return {
         ...state,
@@ -139,6 +177,7 @@ export const {
   resetThreadDetail,
   setIsReachEnd,
   setCommentAncestorDetail,
+  setCommentVote,
 } = threadDetailSlice.actions;
 
 export const appendCommentPage = (threadId: string, pageNum: number) => {
@@ -163,6 +202,24 @@ export const prependCommentPage = (threadId: string, pageNum: number) => {
       pageNum,
     });
     dispatch(setThreadDetail(apiResponse));
+  };
+};
+
+export const upvoteComment = (commentId: string, pageNum: number) => {
+  return async (dispatch: Dispatch) => {
+    const apiResponse = await commentService.upvoteComment({
+      commentId,
+    });
+    dispatch(setCommentVote({ pageNum, apiResponse }));
+  };
+};
+
+export const downvoteComment = (commentId: string, pageNum: number) => {
+  return async (dispatch: Dispatch) => {
+    const apiResponse = await commentService.downvoteComment({
+      commentId,
+    });
+    dispatch(setCommentVote({ pageNum, apiResponse }));
   };
 };
 
