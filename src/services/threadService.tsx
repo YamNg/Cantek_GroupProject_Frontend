@@ -6,6 +6,22 @@ import { IThreadDetail } from "../models/api/thread-detail.api.interface";
 const baseUrl = import.meta.env.VITE_FORUM_BASE_URL;
 const threadUrl = `${baseUrl}/thread`;
 
+const createThreadComment = async ({
+  threadId,
+  content,
+}: {
+  threadId: string;
+  content: string;
+}) => {
+  const requestUrl = `${threadUrl}/${threadId}/comment`;
+  const { data }: { data: IApiResponse<{ _id: string }> } = await axios.post(
+    requestUrl,
+    { content },
+    { withCredentials: true }
+  );
+  return data.body;
+};
+
 const getLatestThreads = async ({
   lastThreadId,
 }: {
@@ -50,4 +66,9 @@ const getThreadDetail = async ({
   return { body: data.body, pageNum };
 };
 
-export default { getThreadsByTopic, getLatestThreads, getThreadDetail };
+export default {
+  getThreadsByTopic,
+  getLatestThreads,
+  getThreadDetail,
+  createThreadComment,
+};
