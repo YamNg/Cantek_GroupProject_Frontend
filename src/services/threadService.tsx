@@ -6,6 +6,24 @@ import { IThreadDetail } from "../models/api/thread-detail.api.interface";
 const baseUrl = import.meta.env.VITE_FORUM_BASE_URL;
 const threadUrl = `${baseUrl}/thread`;
 
+const createThread = async ({
+  topicId,
+  title,
+  content,
+}: {
+  topicId: string;
+  title: string;
+  content: string;
+}) => {
+  const requestUrl = threadUrl;
+  const { data }: { data: IApiResponse<{ _id: string }> } = await axios.post(
+    requestUrl,
+    { topicId, title, content },
+    { withCredentials: true }
+  );
+  return data.body;
+};
+
 const createThreadComment = async ({
   threadId,
   content,
@@ -14,6 +32,24 @@ const createThreadComment = async ({
   content: string;
 }) => {
   const requestUrl = `${threadUrl}/${threadId}/comment`;
+  const { data }: { data: IApiResponse<{ _id: string }> } = await axios.post(
+    requestUrl,
+    { content },
+    { withCredentials: true }
+  );
+  return data.body;
+};
+
+const createThreadReplyComment = async ({
+  threadId,
+  commentId,
+  content,
+}: {
+  threadId: string;
+  commentId: string;
+  content: string;
+}) => {
+  const requestUrl = `${threadUrl}/${threadId}/comment/${commentId}/reply`;
   const { data }: { data: IApiResponse<{ _id: string }> } = await axios.post(
     requestUrl,
     { content },
@@ -70,5 +106,7 @@ export default {
   getThreadsByTopic,
   getLatestThreads,
   getThreadDetail,
+  createThread,
   createThreadComment,
+  createThreadReplyComment,
 };

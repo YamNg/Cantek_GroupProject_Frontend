@@ -6,6 +6,8 @@ import { IThreadDetailComponentState } from "../models/component/thread-detail.c
 import { AppDispatch } from "../config/store";
 import { resetThreadDetail } from "../reducers/threadDetailReducer";
 import { Link, useParams } from "react-router-dom";
+import { initializeContentForm } from "../reducers/ContentFormReducer";
+import { ContentCreationFormType } from "../constants/ContentCreationFormType";
 
 const ThreadDetailViewNav = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -73,7 +75,18 @@ const ThreadDetailViewNav = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col items-center cursor-pointer hover:bg-gray-700">
+            <div
+              className="flex flex-col items-center cursor-pointer hover:bg-gray-700"
+              onClick={() =>
+                dispatch(
+                  initializeContentForm({
+                    type: ContentCreationFormType.Comment,
+                    itemId: { threadId: threadDetailViewState._id },
+                    formDisplayTitle: threadDetailViewState.title,
+                  })
+                )
+              }
+            >
               <div className="flex p-[0.625rem]">
                 <img
                   src={addCommentLogo}

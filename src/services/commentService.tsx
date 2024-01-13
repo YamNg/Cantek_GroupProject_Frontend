@@ -21,4 +21,24 @@ const getCommentInBatch = async ({ commentIds }: { commentIds?: string[] }) => {
   }
 };
 
-export default { getCommentInBatch };
+const upvoteComment = async ({ commentId }: { commentId: string }) => {
+  const requestUrl = `${commentUrl}/${commentId}/upvote`;
+  const { data }: { data: IApiResponse<IComment> } = await axios.post(
+    requestUrl,
+    {},
+    { withCredentials: true }
+  );
+  return data.body;
+};
+
+const downvoteComment = async ({ commentId }: { commentId: string }) => {
+  const requestUrl = `${commentUrl}/${commentId}/downvote`;
+  const { data }: { data: IApiResponse<IComment> } = await axios.post(
+    requestUrl,
+    {},
+    { withCredentials: true }
+  );
+  return data.body;
+};
+
+export default { getCommentInBatch, upvoteComment, downvoteComment };
