@@ -1,6 +1,6 @@
 import axios from "axios";
 import { IApiResponse } from "../models/api/api-response.api.interface";
-import { IThreadListApiResponse } from "../models/api/thread-list.api.interface";
+import { IUser } from "../models/api/user.api.interface";
 
 const baseUrl = import.meta.env.VITE_USER_BASE_URL;
 
@@ -13,12 +13,11 @@ const login = async ({
 }) => {
   const requestUrl = `${baseUrl}/login`;
 
-  const { data }: { data: IApiResponse<IThreadListApiResponse> } =
-    await axios.post(
-      requestUrl,
-      { email, password },
-      { withCredentials: true }
-    );
+  const { data }: { data: IApiResponse<IUser> } = await axios.post(
+    requestUrl,
+    { email, password },
+    { withCredentials: true }
+  );
   return data.body;
 };
 
