@@ -12,6 +12,7 @@ import { ContentCreationFormType } from "../constants/ContentCreationFormType";
 import { useState } from "react";
 import { showResponseMsg } from "../reducers/ResponseMsgReducer";
 import { AxiosError } from "axios";
+import { loginFormNegateActive } from "../reducers/UserFormReducer";
 
 const ContentCreationForm = () => {
   const [formData, setFormData] = useState({ title: "", content: "" });
@@ -86,12 +87,16 @@ const ContentCreationForm = () => {
       }
     } catch (error) {
       if (error instanceof AxiosError) {
-        dispatch(
-          showResponseMsg({
-            isSuccess: false,
-            message: error.response?.data.errorCode,
-          })
-        );
+        if (error.response?.data.errorCode === "MISSING_TOKEN") {
+          dispatch(loginFormNegateActive());
+        } else {
+          dispatch(
+            showResponseMsg({
+              isSuccess: false,
+              message: error.response?.data.errorCode,
+            })
+          );
+        }
       } else {
         dispatch(
           showResponseMsg({
