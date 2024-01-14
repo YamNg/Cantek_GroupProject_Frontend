@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { initializeMenu } from "../reducers/menuReducer";
 import { AppDispatch } from "../config/store";
 import ThreadDetailView from "../components/ThreadDetailView";
+import UserMenu from "../components/UserMenu";
 
 const ForumMainPage = () => {
   // trigger actions to load default data to setup the app
@@ -14,6 +15,7 @@ const ForumMainPage = () => {
 
   return (
     <>
+      <UserMenu />
       <ThreadListView />
       <ThreadDetailView />
     </>

@@ -27,7 +27,7 @@ const ResponseResultMessage = () => {
   return (
     responseMsgState.isActive &&
     (responseMsgState.isSuccess ? (
-      <div className="fixed inset-0 z-50 flex justify-center items-center backdrop-blur-sm bg-white/30 ">
+      <div className="fixed inset-0 z-100 flex justify-center items-center backdrop-blur-sm bg-white/30 ">
         <div className="h-60 w-60 bg-white border-2 border-black rounded-lg flex flex-col justify-center items-center p-2">
           <img src={cheersLogo} className="h-32 w-32" alt="arrow" />
           <div>Request Success</div>
@@ -39,7 +39,7 @@ const ResponseResultMessage = () => {
         ></div>
       </div>
     ) : (
-      <div className="fixed inset-0 z-50 flex justify-center items-center backdrop-blur-sm bg-white/30 ">
+      <div className="fixed inset-0 z-100 flex justify-center items-center backdrop-blur-sm bg-white/30 ">
         <div className="h-60 w-fit min-w-60 bg-white border-2 border-black rounded-lg flex flex-col justify-center items-center p-2">
           <img src={errorLogo} className="h-32 w-32" alt="arrow" />
           <div>Request Failed</div>

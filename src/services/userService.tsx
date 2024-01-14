@@ -21,4 +21,16 @@ const login = async ({
   return data.body;
 };
 
-export default { login };
+const logout = async ({ userId }: { userId: string }) => {
+  const requestUrl = `${baseUrl}/logout`;
+
+  const { data }: { data: IApiResponse<IUser> } = await axios.post(
+    requestUrl,
+    { userId },
+    { withCredentials: true }
+  );
+
+  return data.body;
+};
+
+export default { login, logout };
