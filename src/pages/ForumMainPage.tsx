@@ -5,6 +5,9 @@ import { initializeMenu } from "../reducers/menuReducer";
 import { AppDispatch } from "../config/store";
 import ThreadDetailView from "../components/ThreadDetailView";
 import UserMenu from "../components/UserMenu";
+import ContentCreationForm from "../components/ContentCreationForm";
+import Menu from "../components/Menu";
+import ResponseResultMessage from "../components/ResponseMessage";
 
 const ForumMainPage = () => {
   // trigger actions to load default data to setup the app
@@ -15,6 +18,9 @@ const ForumMainPage = () => {
 
   return (
     <>
+      <Menu />
+      <ContentCreationForm />
+      <ResponseResultMessage />
       <UserMenu />
       <ThreadListView />
       <ThreadDetailView />

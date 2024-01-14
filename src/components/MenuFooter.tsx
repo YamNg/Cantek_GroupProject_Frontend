@@ -24,7 +24,7 @@ const MenuFooter = () => {
       dispatch(
         showResponseMsg({
           isSuccess: false,
-          errorMessage: "LOGOUT_FAILED",
+          message: "LOGOUT_FAILED",
         })
       );
     }

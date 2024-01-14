@@ -1,19 +1,16 @@
-import Menu from "./components/Menu";
 import { Routes } from "react-router";
 import { Navigate, Route } from "react-router-dom";
 import ForumMainPage from "./pages/ForumMainPage";
-import ContentCreationForm from "./components/ContentCreationForm";
-import ResponseResultMessage from "./components/ResponseMessage";
+import UserRegisterPage from "./pages/UserRegisterPage";
 
 const App = () => {
   return (
     <div className="flex overflow-x-hidden">
-      <Menu />
-      <ContentCreationForm />
-      <ResponseResultMessage />
-
       <Routes>
         <Route path="/" element={<Navigate replace to="/topic/latest" />} />
+
+        <Route path="/register" element={<UserRegisterPage />} />
+
         <Route path="/topic/:topicId" element={<ForumMainPage />} />
         <Route
           path="/topic/:topicId/thread/:thread"
