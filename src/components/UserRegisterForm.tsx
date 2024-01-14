@@ -66,7 +66,7 @@ const UserRegisterForm = () => {
   };
 
   const handleCancel = () => {
-    navigate("/");
+    navigate(-1);
   };
 
   return (
