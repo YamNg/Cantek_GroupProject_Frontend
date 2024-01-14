@@ -13,18 +13,27 @@ const MenuFooter = () => {
   });
 
   const handleLogout = async () => {
-    try {
-      await dispatch(userLogout({ userId: userFormState.userId }));
-      dispatch(
-        showResponseMsg({
-          isSuccess: true,
-        })
-      );
-    } catch (error) {
+    if (userFormState.isLogin) {
+      try {
+        await dispatch(userLogout({ userId: userFormState.userId }));
+        dispatch(
+          showResponseMsg({
+            isSuccess: true,
+          })
+        );
+      } catch (error) {
+        dispatch(
+          showResponseMsg({
+            isSuccess: false,
+            message: "LOGOUT_FAILED",
+          })
+        );
+      }
+    } else {
       dispatch(
         showResponseMsg({
           isSuccess: false,
-          message: "LOGOUT_FAILED",
+          message: "Already Logged Out",
         })
       );
     }
