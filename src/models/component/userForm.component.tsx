@@ -3,5 +3,5 @@ export interface IUserForm {
   isLogin: boolean;
   userId: string;
   username: string;
-  userNo: Number;
+  userNo: number;
 }

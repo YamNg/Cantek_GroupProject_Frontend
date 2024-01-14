@@ -8,7 +8,8 @@ import { showResponseMsg } from "../reducers/ResponseMsgReducer";
 
 const MenuFooter = () => {
   const dispatch: AppDispatch = useDispatch();
-  const userFormState = useSelector((userForm: IUserForm) => {
+
+  const userFormState = useSelector(({ userForm }: { userForm: IUserForm }) => {
     return userForm;
   });
 
@@ -45,7 +46,7 @@ const MenuFooter = () => {
         <span
           className="flex items-center justify-center cursor-pointer grow hover:bg-gray-800"
           onClick={() => {
-            if (!userFormState.isLogin) dispatch(initializeLoginForm());
+            dispatch(initializeLoginForm());
           }}
         >
           <img src={userLogo} className="h-8 w-8" alt="arrow" />
