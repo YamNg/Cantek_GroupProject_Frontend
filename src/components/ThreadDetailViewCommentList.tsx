@@ -87,14 +87,14 @@ const ThreadDetailViewCommentList = () => {
         dispatch(
           showResponseMsg({
             isSuccess: false,
-            errorMessage: error.response?.data.errorCode,
+            message: error.response?.data.errorCode,
           })
         );
       } else {
         dispatch(
           showResponseMsg({
             isSuccess: false,
-            errorMessage: "UNKNOWN_ERROR",
+            message: "UNKNOWN_ERROR",
           })
         );
       }

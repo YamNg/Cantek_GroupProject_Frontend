@@ -6,21 +6,21 @@ const responseMsgSlice = createSlice({
   initialState: {
     isActive: false,
     isSuccess: false,
-    errorMessage: "",
+    message: "",
   } as IResponseResultMessageState,
   reducers: {
     hideResponseMsg() {
       return {
         isActive: false,
         isSuccess: false,
-        errorMessage: "",
+        message: "",
       };
     },
     showResponseMsg(_, action) {
       return {
         isActive: true,
         isSuccess: action.payload.isSuccess,
-        errorMessage: action.payload.errorMessage,
+        message: action.payload.message,
       };
     },
   },
