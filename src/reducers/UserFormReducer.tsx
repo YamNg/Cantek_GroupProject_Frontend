@@ -1,7 +1,6 @@
 import { Dispatch, createSlice } from "@reduxjs/toolkit";
 import { IUserForm } from "../models/component/userForm.component";
 import userService from "../services/userService";
-import Cookies from "js-cookie";
 
 const userFormSlice = createSlice({
   name: "userForm",
@@ -19,7 +18,7 @@ const userFormSlice = createSlice({
     setUserData(state, action) {
       return {
         ...state,
-        isLogin: action.payload.login,
+        isLogin: action.payload.isLogin,
         userId: action.payload.userId,
         username: action.payload.username,
         userNo: action.payload.userNo,
@@ -42,7 +41,6 @@ export const { loginFormNegateActive, clearUserData, setUserData } =
 
 export const initializeLoginForm = () => {
   return async (dispatch: Dispatch) => {
-    dispatch(clearUserData());
     dispatch(loginFormNegateActive());
   };
 };
@@ -70,10 +68,8 @@ export const userLogin = ({
 
 export const userLogout = ({ userId }: { userId: string }) => {
   return async (dispatch: Dispatch) => {
+    await userService.logout({ userId });
     dispatch(clearUserData());
-    Cookies.remove("accessToken");
-    Cookies.remove("refreshToken");
-    userService.logout({ userId });
   };
 };
 

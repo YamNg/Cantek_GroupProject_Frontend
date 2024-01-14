@@ -4,12 +4,31 @@ import { AppDispatch } from "../config/store";
 import { useDispatch, useSelector } from "react-redux";
 import { IUserForm } from "../models/component/userForm.component";
 import { initializeLoginForm, userLogout } from "../reducers/UserFormReducer";
+import { showResponseMsg } from "../reducers/ResponseMsgReducer";
 
 const MenuFooter = () => {
   const dispatch: AppDispatch = useDispatch();
   const userFormState = useSelector((userForm: IUserForm) => {
     return userForm;
   });
+
+  const handleLogout = async () => {
+    try {
+      await dispatch(userLogout({ userId: userFormState.userId }));
+      dispatch(
+        showResponseMsg({
+          isSuccess: true,
+        })
+      );
+    } catch (error) {
+      dispatch(
+        showResponseMsg({
+          isSuccess: false,
+          errorMessage: "LOGOUT_FAILED",
+        })
+      );
+    }
+  };
 
   return (
     <div className="fixed h-12 w-full bottom-0">
@@ -24,7 +43,7 @@ const MenuFooter = () => {
         </span>
         <span
           className="flex items-center justify-center cursor-pointer grow hover:bg-gray-800"
-          onClick={() => dispatch(userLogout({ userId: userFormState.userId }))}
+          onClick={handleLogout}
         >
           <img src={logoutLogo} className="h-8 w-8" alt="arrow" />
         </span>
