@@ -8,6 +8,7 @@ import UserMenu from "../components/UserMenu";
 import ContentCreationForm from "../components/ContentCreationForm";
 import Menu from "../components/Menu";
 import ResponseResultMessage from "../components/ResponseMessage";
+import { Helmet } from "react-helmet";
 
 const ForumMainPage = () => {
   // trigger actions to load default data to setup the app
@@ -18,6 +19,9 @@ const ForumMainPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>LiCAN</title>
+      </Helmet>
       <Menu />
       <ContentCreationForm />
       <ResponseResultMessage />
