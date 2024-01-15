@@ -73,4 +73,20 @@ export const userLogout = ({ userId }: { userId: string }) => {
   };
 };
 
+export const userVerifyCookie = () => {
+  return async (dispatch: Dispatch) => {
+    const user = await userService.verifyCookie();
+    if (user && user.userId) {
+      dispatch(
+        setUserData({
+          isLogin: true,
+          userId: user?.userId,
+          username: user?.username,
+          userNo: user?.userNo,
+        })
+      );
+    }
+  };
+};
+
 export default userFormSlice.reducer;

@@ -33,6 +33,16 @@ const logout = async ({ userId }: { userId: string }) => {
   return data.body;
 };
 
+const verifyCookie = async () => {
+  const requestUrl = `${baseUrl}/verify`;
+
+  const { data }: { data: IApiResponse<IUser> } = await axios.get(requestUrl, {
+    withCredentials: true,
+  });
+
+  return data.body;
+};
+
 const register = async ({
   username,
   email,
@@ -56,4 +66,4 @@ const register = async ({
   return data.body;
 };
 
-export default { login, logout, register };
+export default { login, logout, verifyCookie, register };

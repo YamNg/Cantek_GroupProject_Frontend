@@ -9,12 +9,15 @@ import ContentCreationForm from "../components/ContentCreationForm";
 import Menu from "../components/Menu";
 import ResponseResultMessage from "../components/ResponseMessage";
 import { Helmet } from "react-helmet";
+import { userVerifyCookie } from "../reducers/UserFormReducer";
 
 const ForumMainPage = () => {
   // trigger actions to load default data to setup the app
   const dispatch: AppDispatch = useDispatch();
+
   useEffect(() => {
     dispatch(initializeMenu());
+    dispatch(userVerifyCookie());
   }, [dispatch]);
 
   return (
