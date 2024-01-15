@@ -53,10 +53,10 @@ const UserLoginForm = () => {
   return (
     <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
       <label
-        htmlFor="username"
+        htmlFor="email"
         className="block text-sm font-medium text-gray-700"
       >
-        Username
+        Email
       </label>
       <input
         type="email"
