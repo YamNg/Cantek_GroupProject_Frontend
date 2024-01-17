@@ -16,7 +16,7 @@ const login = async ({
   // which Cookie cannot set to the public recognized domain
   // Current solution is to define a Rewrite rule in Render, to simulate requesting login api with same domain
   // and bypass the error for setting the cookies for login tokens
-  let requestUrl = currentFrontendUrl ? currentFrontendUrl : baseUrl;
+  let requestUrl = currentFrontendUrl ? currentFrontendUrl + "/user" : baseUrl;
   requestUrl = `${requestUrl}/login`;
 
   const { data }: { data: IApiResponse<IUser> } = await axios.post(
@@ -32,7 +32,7 @@ const logout = async ({ userId }: { userId: string }) => {
   // which Cookie cannot set to the public recognized domain
   // Current solution is to define a Rewrite rule in Render, to simulate requesting login api with same domain
   // and bypass the error for setting the cookies for login tokens
-  let requestUrl = currentFrontendUrl ? currentFrontendUrl : baseUrl;
+  let requestUrl = currentFrontendUrl ? currentFrontendUrl + "/user" : baseUrl;
   requestUrl = `${requestUrl}/logout`;
 
   const { data }: { data: IApiResponse<IUser> } = await axios.post(
