@@ -24,7 +24,7 @@ const ThreadListViewItemList = () => {
   );
 
   return (
-    <div className="flex flex-col mt-10 mb-10 md:mb-0 w-full">
+    <div className="flex flex-col mt-10 mb-16 md:mb-0 w-full">
       {threadItemListState.threads.map((thread) => {
         return (
           <div
